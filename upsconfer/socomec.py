@@ -45,6 +45,8 @@ class UpsSocomec(UpsGeneric):
             'Response': response
             }
         login_response = requests.post('http://%s/tgi/login.tgi' % self.host, data)
+        if not login_response.ok:
+            raise LoginFailure()
         self.cookies = login_response.cookies
         return True
 
