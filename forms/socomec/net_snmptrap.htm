@@ -1,0 +1,305 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+"http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>UPS Management Web</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT=
+"text/html; charset=iso-8859-1">
+<link REL="SHORTCUT ICON" HREF="/soco.ico">
+<link REL="stylesheet" HREF="/common.css" TYPE="text/css">
+<link REL="stylesheet" HREF="/template.css" TYPE="text/css">
+</head>
+<body>
+<form NAME="net_trapaccess" ACTION="/tgi/net_trapaccess.tgi"
+      METHOD="post">
+<div ID="userShell" ALIGN="center">
+<div ID="pgSite">
+<div ID="pgContenu">
+<table CLASS="w100p" SUMMARY="">
+<tr CLASS="tdBottom">
+<td ID="logo"><img SRC="/logo_ups.jpg" BORDER=
+"0"></td></tr></table>
+<table ID="menu" SUMMARY="">
+<tr CLASS="tdTop">
+<td>
+<div ID="menuItem"><a HREF="/index.htm">UPS
+Information</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/mgnt_config.htm">UPS
+Management</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/net_user.htm" CLASS=
+'On'>Network</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/hist_log1.htm">UPS
+History</a></div></td>
+<!--<td>
+<div ID="menuItem"><a HREF=
+"/env_sensor.htm">Environment</a></div></td>-->
+<td CLASS="w100p">&nbsp;</td></tr></table>
+<table ID="smenu" SUMMARY="">
+<tr>
+<td><img WIDTH="1" HEIGHT="24" ALT="" SRC="/blank.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_user.htm"><img ALT="" SRC=
+"/puce_on.gif">User Manager</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_ipconfig.htm"><img ALT=""
+     SRC="/puce_on.gif">System Configuration</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_snmpaccess1.htm"><img ALT=""
+     SRC="/puce_on.gif">SNMPv1 Access Control</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_snmpusm.htm"><img ALT=""
+     SRC="/puce_on.gif">SNMPv3 USM</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_snmptrap.htm" CLASS=
+     'On'><img ALT="" SRC="/puce_on.gif">SNMP Trap</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_time.htm"><img ALT="" SRC=
+"/puce_on.gif">Time Server</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_mail.htm"><img ALT="" SRC=
+"/puce_on.gif">Mail Server</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_wol.htm"><img ALT="" SRC=
+"/puce_on.gif">Wake On LAN</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td CLASS="w100p">&nbsp;</td></tr></table>
+<table CLASS="w100p" BORDER="0">
+<tr>
+<td HEIGHT="22" ALIGN="right">
+System Time: 01/05/2017 Thursday 15:14:56</td></tr>
+
+<tr>
+<td WIDTH="100%">
+<table CELLSPACING="5" CELLPADDING="0" WIDTH="100%" HEIGHT="350"
+BORDER="0">
+<tr>
+<td COLSPAN="8" CLASS="title" ALIGN="center">SNMP Trap
+Table</td></tr>
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center" VALIGN="top" CLASS="bold">Index</td>
+<td WIDTH="23%" ALIGN="center" VALIGN="top" CLASS="bold">Target
+IP</td>
+<td WIDTH="20%" ALIGN="center" VALIGN="top" CLASS="bold">
+Community<br>
+(12 bytes max.)</td>
+<td WIDTH="20%" ALIGN="center" VALIGN="top" CLASS="bold">Event
+Level</td>
+<td WIDTH="10%" ALIGN="center" VALIGN="top" CLASS="bold">Trap
+Type</td>
+<td WIDTH="10%" ALIGN="center" VALIGN="top" CLASS="bold">MIB
+Type</td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">1</td>
+<td WIDTH="23%" ALIGN="center"><input NAME="NMS1"
+VALUE="192.168.18.173" SIZE="15" MAXLENGTH="15"></td>
+<td WIDTH="20%" ALIGN="center"><input NAME="COM1"
+VALUE="commstr" SIZE="12" MAXLENGTH="12"></td>
+<td WIDTH="20%" ALIGN="center"><select NAME="PER1">
+<option VALUE="non" >None</option>
+<option VALUE="inf" selected>Information</option>
+<option VALUE="war" >Warning</option>
+<option VALUE="sev" >
+Severity</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TTT1">
+<option VALUE="0" selected>SNMPv1</option>
+<option VALUE="1" >SNMPv2c</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TYP1">
+<option VALUE="v4" selected>DV4</option>
+<option VALUE="rfc" >
+RFC1628</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">2</td>
+<td WIDTH="23%" ALIGN="center"><input NAME="NMS2"
+VALUE="0.0.0.0" SIZE="15" MAXLENGTH="15"></td>
+<td WIDTH="20%" ALIGN="center"><input NAME="COM2"
+VALUE="" SIZE="12" MAXLENGTH="12"></td>
+<td WIDTH="20%" ALIGN="center"><select NAME="PER2">
+<option VALUE="non" selected>None</option>
+<option VALUE="inf" >Information</option>
+<option VALUE="war" >Warning</option>
+<option VALUE="sev" >
+Severity</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TTT2">
+<option VALUE="0" selected>SNMPv1</option>
+<option VALUE="1" >SNMPv2c</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TYP2">
+<option VALUE="v4" selected>DV4</option>
+<option VALUE="rfc" >
+RFC1628</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">3</td>
+<td WIDTH="23%" ALIGN="center"><input NAME="NMS3"
+VALUE="0.0.0.0" SIZE="15" MAXLENGTH="15"></td>
+<td WIDTH="20%" ALIGN="center"><input NAME="COM3"
+VALUE="" SIZE="12" MAXLENGTH="12"></td>
+<td WIDTH="20%" ALIGN="center"><select NAME="PER3">
+<option VALUE="non" selected>None</option>
+<option VALUE="inf" >Information</option>
+<option VALUE="war" >Warning</option>
+<option VALUE="sev" >
+Severity</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TTT3">
+<option VALUE="0" selected>SNMPv1</option>
+<option VALUE="1" >SNMPv2c</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TYP3">
+<option VALUE="v4" selected>DV4</option>
+<option VALUE="rfc" >
+RFC1628</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">4</td>
+<td WIDTH="23%" ALIGN="center"><input NAME="NMS4"
+VALUE="0.0.0.0" SIZE="15" MAXLENGTH="15"></td>
+<td WIDTH="20%" ALIGN="center"><input NAME="COM4"
+VALUE="" SIZE="12" MAXLENGTH="12"></td>
+<td WIDTH="20%" ALIGN="center"><select NAME="PER4">
+<option VALUE="non" selected>None</option>
+<option VALUE="inf" >Information</option>
+<option VALUE="war" >Warning</option>
+<option VALUE="sev" >
+Severity</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TTT4">
+<option VALUE="0" selected>SNMPv1</option>
+<option VALUE="1" >SNMPv2c</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TYP4">
+<option VALUE="v4" selected>DV4</option>
+<option VALUE="rfc" >
+RFC1628</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">5</td>
+<td WIDTH="23%" ALIGN="center"><input NAME="NMS5"
+VALUE="0.0.0.0" SIZE="15" MAXLENGTH="15"></td>
+<td WIDTH="20%" ALIGN="center"><input NAME="COM5"
+VALUE="" SIZE="12" MAXLENGTH="12"></td>
+<td WIDTH="20%" ALIGN="center"><select NAME="PER5">
+<option VALUE="non" selected>None</option>
+<option VALUE="inf" >Information</option>
+<option VALUE="war" >Warning</option>
+<option VALUE="sev" >
+Severity</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TTT5">
+<option VALUE="0" selected>SNMPv1</option>
+<option VALUE="1" >SNMPv2c</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TYP5">
+<option VALUE="v4" selected>DV4</option>
+<option VALUE="rfc" >
+RFC1628</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">6</td>
+<td WIDTH="23%" ALIGN="center"><input NAME="NMS6"
+VALUE="0.0.0.0" SIZE="15" MAXLENGTH="15"></td>
+<td WIDTH="20%" ALIGN="center"><input NAME="COM6"
+VALUE="" SIZE="12" MAXLENGTH="12"></td>
+<td WIDTH="20%" ALIGN="center"><select NAME="PER6">
+<option VALUE="non" selected>None</option>
+<option VALUE="inf" >Information</option>
+<option VALUE="war" >Warning</option>
+<option VALUE="sev" >
+Severity</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TTT6">
+<option VALUE="0" selected>SNMPv1</option>
+<option VALUE="1" >SNMPv2c</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TYP6">
+<option VALUE="v4" selected>DV4</option>
+<option VALUE="rfc" >
+RFC1628</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">7</td>
+<td WIDTH="23%" ALIGN="center"><input NAME="NMS7"
+VALUE="0.0.0.0" SIZE="15" MAXLENGTH="15"></td>
+<td WIDTH="20%" ALIGN="center"><input NAME="COM7"
+VALUE="" SIZE="12" MAXLENGTH="12"></td>
+<td WIDTH="20%" ALIGN="center"><select NAME="PER7">
+<option VALUE="non" selected>None</option>
+<option VALUE="inf" >Information</option>
+<option VALUE="war" >Warning</option>
+<option VALUE="sev" >
+Severity</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TTT7">
+<option VALUE="0" selected>SNMPv1</option>
+<option VALUE="1" >SNMPv2c</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TYP7">
+<option VALUE="v4" selected>DV4</option>
+<option VALUE="rfc" >
+RFC1628</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">8</td>
+<td WIDTH="23%" ALIGN="center"><input NAME="NMS8"
+VALUE="0.0.0.0" SIZE="15" MAXLENGTH="15"></td>
+<td WIDTH="20%" ALIGN="center"><input NAME="COM8"
+VALUE="" SIZE="12" MAXLENGTH="12"></td>
+<td WIDTH="20%" ALIGN="center"><select NAME="PER8">
+<option VALUE="non" selected>None</option>
+<option VALUE="inf" >Information</option>
+<option VALUE="war" >Warning</option>
+<option VALUE="sev" >
+Severity</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TTT8">
+<option VALUE="0" selected>SNMPv1</option>
+<option VALUE="1" >SNMPv2c</option></select></td>
+<td WIDTH="10%" ALIGN="center"><select NAME="TYP8">
+<option VALUE="v4" selected>DV4</option>
+<option VALUE="rfc" >
+RFC1628</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td COLSPAN="6" ALIGN="center" WIDTH="88%"><input TYPE="submit"
+VALUE="Submit" NAME="Submit"> &nbsp; &nbsp; See <a HREF=
+"/event_level.htm" TARGET="MAIN">event level</a></td>
+<td WIDTH="9%"></td></tr>
+<tr>
+<td WIDTH="3%"></td>
+<td COLSPAN="5" WIDTH="88%">Trap Test</td>
+<td WIDTH="9%"></td></tr>
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%"></td>
+<td COLSPAN="4" WIDTH="83%"><input TYPE="submit" VALUE=
+"Power Fail Test" NAME="TST_PF"> &nbsp; <input TYPE="submit"
+       VALUE="Power Restore Test" NAME="TST_PR"></td>
+<td WIDTH="9%"></td></tr></table>
+<br>
+<br></td></tr>
+<tr>
+<td>
+<div CLASS="bottomPage"><a HREF=
+"javascript:history.back()"><img ALT="" SRC=
+"/retour.gif">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <a HREF="#Top"><img ALT="" SRC=
+   "/top.gif">Top</a></div></td></tr>
+<tr>
+<td>
+<div ID="shadowLeft"><img ALT="" SRC=
+"/shadowl.jpg"></div></td></tr></table></div></div>
+</div>
+</form>
+</body>
+</html>
