@@ -133,7 +133,7 @@ class UpsSocomec(UpsGeneric):
         return True
 
     def get_serial(self):
-        txt = self.get_info_text()
+        txt = self._get_info_text()
         m = re.search('Serial Number:</td>\n<td WIDTH="50%" CLASS="bold">([^<]+)', txt, re.MULTILINE)
         if not m:
             raise SerialNotFound()
