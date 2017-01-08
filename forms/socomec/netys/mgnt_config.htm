@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+"http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT=
+"text/html; charset=iso-8859-1">
+<title>UPS Management Web</title>
+<link REL="SHORTCUT ICON" HREF="/soco.ico">
+<link REL="stylesheet" HREF="/common.css" TYPE="text/css">
+<link REL="stylesheet" HREF="/template.css" TYPE="text/css">
+</head>
+<body>
+<form NAME="mgnt_config" ACTION="/tgi/mgnt_config.tgi"
+      METHOD="post">
+<div ID="userShell" ALIGN="center">
+<div ID="pgSite">
+<div ID="pgContenu">
+<table CLASS="w100p" SUMMARY="">
+<tr CLASS="tdBottom">
+<td ID="logo"><img SRC="/logo_ups.jpg" BORDER=
+"0"></td></tr></table>
+<table ID="menu" SUMMARY="">
+<tr CLASS="tdTop">
+<td>
+<div ID="menuItem"><a HREF="/index.htm">UPS
+Information</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/mgnt_config.htm" CLASS='On'>UPS
+Management</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/net_user.htm">Network</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/hist_log1.htm">UPS
+History</a></div></td>
+<!--<td>
+<div ID="menuItem"><a HREF=
+"/env_sensor.htm">Environment</a></div></td>-->
+<td CLASS="w100p">&nbsp;</td></tr></table>
+<table ID="smenu" SUMMARY="">
+<tr>
+<td><img WIDTH="1" HEIGHT="24" ALT="" SRC="/blank.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/mgnt_config.htm" CLASS=
+     'On'><img ALT="" SRC="/puce_on.gif">Configure</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/mgnt_control.htm"><img ALT=""
+     SRC="/puce_on.gif">Control</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/mgnt_wschedule.htm"><img ALT=""
+     SRC="/puce_on.gif">Weekly Schedule</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/mgnt_sschedule.htm"><img ALT=""
+     SRC="/puce_on.gif">Specific Schedule</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/mgnt_shutdown.htm"><img ALT=""
+     SRC="/puce_on.gif">Shutdown Parameters</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td CLASS="w100p">&nbsp;</td></tr></table>
+<table CLASS="w100p" BORDER="0">
+<tr>
+<td HEIGHT="22" ALIGN="right"><b></b>
+System Time: 12/13/2016 Tuesday 15:27:13</td></tr>
+<tr>
+<td WIDTH="100%">
+<table CELLSPACING="5" CELLPADDING="0" WIDTH="100%" HEIGHT="350"
+BORDER="0">
+<!--<tr>
+<td COLSPAN="5" CLASS="title" ALIGN="center">Auto-Restart</td></tr>
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="38%" ALIGN="right">Reboot After Power Restore:</td>
+<td WIDTH="40%" CLASS="bold"><input TYPE="checkbox" NAME="EnAuto"
+VALUE="1" > Enable</td>
+<td WIDTH="10%" ALIGN="right"><input TYPE="submit" VALUE="Submit"
+NAME="AutoReboot"></td>
+<td WIDTH="9%"></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Boot Delay After Power Restore:</td>
+<td CLASS="bold"><input NAME="BDelay" VALUE="0"
+       SIZE="3" MAXLENGTH="3"> Seconds</td>
+<td ALIGN="right"><input TYPE="submit" VALUE="Submit" NAME=
+"BootDelay"></td>
+<td></td></tr>-->
+<tr>
+<td COLSPAN="5" CLASS="title" ALIGN="center">UPS Buzzer</td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Buzzer Control:</td>
+<td CLASS="bold"><input TYPE="checkbox" NAME="EnBuz" VALUE="1"
+> Enable</td>
+<td ALIGN="right"><input TYPE="submit" VALUE="Submit" NAME=
+"EDB"></td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Buzzer Alarm:</td>
+<td CLASS="bold">Silence</td>
+<td ALIGN="right"><input TYPE="submit" VALUE="Submit" NAME=
+"BUZ"></td>
+<td></td></tr>
+<!--<tr>
+<td COLSPAN="5" CLASS="title" ALIGN="center">Voltage
+Sensitivity</td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Detection Rate:</td>
+<td CLASS="bold"><select NAME="Detect_Rate" SIZE="1">
+<option VALUE="0" selected>Normal</option>
+<option VALUE="1" >Reduced</option>
+<option VALUE="2" >Low</option></select></td>
+<td ALIGN="right"><input TYPE="submit" VALUE="Submit" NAME=
+"VoltSens"></td>
+<td></td></tr>-->
+<!--<tr>
+<td COLSPAN="5" CLASS="title" ALIGN="center">Transfer
+Voltage</td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Low Transfer Voltage:</td>
+<td CLASS="bold"><input NAME="LowVolt" VALUE="0"
+SIZE="3" MAXLENGTH="3">(0~0)</td>
+<td ALIGN="right"></td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">High Transfer Voltage:</td>
+<td CLASS="bold"><input NAME="HiVolt" VALUE="0"
+       SIZE="3" MAXLENGTH="3">(0~0)</td>
+<td ALIGN="right"><input TYPE="submit" VALUE="Submit" NAME=
+"TxVolt"></td>
+<td></td></tr>-->
+<tr>
+<td COLSPAN="5" CLASS="title" ALIGN="center">Low Battery</td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Depend On Battery Level:</td>
+<td CLASS="bold"><input TYPE="checkbox" NAME="EnLB" VALUE="1"
+> Enable, &lt;
+<input NAME="LbcDelay" VALUE="30" SIZE="2"
+       MAXLENGTH="2"> %</td>
+<td ALIGN="right"><input TYPE="submit" VALUE="Submit" NAME=
+"LBC"></td>
+<td></td></tr>
+<!--<tr>
+<td COLSPAN="5" CLASS="title" ALIGN="center">Battery Replacement
+Date</td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Previous Replacement Date:</td>
+<td CLASS="bold"><input NAME="LRD" VALUE="" SIZE="10"
+       MAXLENGTH="10"> (MM/DD/YYYY)</td>
+<td ALIGN="right"></td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Next Replacement Date:</td>
+<td CLASS="bold"><input NAME="NRD" VALUE="" SIZE="10"
+       MAXLENGTH="10"> (MM/DD/YYYY)</td>
+<td ALIGN="right"><input TYPE="submit" VALUE="Submit" NAME=
+"BRD"></td>
+<td></td></tr>-->
+<!--<tr>
+<td COLSPAN="5" CLASS="title" ALIGN="center">External Battery
+Pack</td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Number of Battery Pack:</td>
+<td CLASS="bold">0</td>
+<td ALIGN="right"></td>
+<td></td></tr>--></table>
+<br>
+<br></td></tr>
+<tr>
+<td>
+<div CLASS="bottomPage"><a HREF=
+"javascript:history.back()"><img ALT="" SRC=
+"/retour.gif">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <a HREF="#Top"><img ALT="" SRC=
+   "/top.gif">Top</a></div></td></tr>
+<tr>
+<td>
+<div ID="shadowLeft"><img ALT="" SRC=
+"/shadowl.jpg"></div></td></tr></table></div>
+
+</div>
+</div>
+</form>
+</body>
+</html>

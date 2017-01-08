@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+"http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>UPS Management Web</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT=
+"text/html; charset=iso-8859-1">
+<link REL="SHORTCUT ICON" HREF="/soco.ico">
+<link REL="stylesheet" HREF="/common.css" TYPE="text/css">
+<link REL="stylesheet" HREF="/template.css" TYPE="text/css">
+</head>
+<body>
+<form NAME="mgnt_sschedule" ACTION="/tgi/mgnt_sschedule.tgi"
+      METHOD="post">
+<div ID="userShell" ALIGN="center">
+<div ID="pgSite">
+<div ID="pgContenu">
+<table CLASS="w100p" SUMMARY="">
+<tr CLASS="tdBottom">
+<td ID="logo"><img SRC="/logo_ups.jpg" BORDER=
+"0"></td></tr></table>
+<table ID="menu" SUMMARY="">
+<tr CLASS="tdTop">
+<td>
+<div ID="menuItem"><a HREF="/index.htm">UPS
+Information</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/mgnt_config.htm" CLASS='On'>UPS
+Management</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/net_user.htm">Network</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/hist_log1.htm">UPS
+History</a></div></td>
+<!--<td>
+<div ID="menuItem"><a HREF=
+"/env_sensor.htm">Environment</a></div></td>-->
+<td CLASS="w100p">&nbsp;</td></tr></table>
+<table ID="smenu" SUMMARY="">
+<tr>
+<td><img WIDTH="1" HEIGHT="24" ALT="" SRC="/blank.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/mgnt_config.htm"><img ALT=""
+     SRC="/puce_on.gif">Configure</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/mgnt_control.htm"><img ALT=""
+     SRC="/puce_on.gif">Control</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/mgnt_wschedule.htm"><img ALT=""
+     SRC="/puce_on.gif">Weekly Schedule</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/mgnt_sschedule.htm" CLASS=
+'On'><img ALT="" SRC="/puce_on.gif">Specific Schedule</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/mgnt_shutdown.htm"><img ALT=""
+     SRC="/puce_on.gif">Shutdown Parameters</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td CLASS="w100p">&nbsp;</td></tr></table>
+<table CLASS="w100p" BORDER="0">
+<tr>
+<td HEIGHT="22" ALIGN="right"><b></b>
+System Time: 12/13/2016 Tuesday 15:27:45</td></tr>
+
+<tr>
+<td WIDTH="100%">
+<table CELLSPACING="5" CELLPADDING="0" WIDTH="100%" HEIGHT="350"
+BORDER="0">
+<tr>
+<td WIDTH="3%"></td>
+<td COLSPAN="5" CLASS="title" ALIGN="center">Specific Date
+Schedule</td></tr>
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="10%" ALIGN="center" CLASS="bold">Index</td>
+<td WIDTH="28%" ALIGN="center" CLASS="bold">Date(MM/DD/YYYY)</td>
+<td WIDTH="30%" ALIGN="center" CLASS="bold">Time(hh:mm)</td>
+<td WIDTH="20%" ALIGN="center" CLASS="bold">Action</td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="10%" ALIGN="center" CLASS="bold">1</td>
+<td WIDTH="28%" ALIGN="center" CLASS="bold"><input NAME=
+"D1" VALUE="00/00/2000" SIZE="10" MAXLENGTH=
+"10"></td>
+<td WIDTH="30%" ALIGN="center" CLASS="bold"><input NAME=
+"T1" VALUE="00:00" SIZE="5" MAXLENGTH="5"></td>
+<td WIDTH="20%" ALIGN="center" CLASS="bold"><select NAME=
+"A1">
+<option VALUE="0" selected>Stop Action</option>
+<option VALUE="1" >Shutdown</option>
+<option VALUE="2" >Restart</option>
+<option VALUE="3" >Battery Test</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="10%" ALIGN="center" CLASS="bold">2</td>
+<td WIDTH="28%" ALIGN="center" CLASS="bold"><input NAME=
+"D2" VALUE="00/00/2000" SIZE="10" MAXLENGTH=
+"10"></td>
+<td WIDTH="30%" ALIGN="center" CLASS="bold"><input NAME=
+"T2" VALUE="00:00" SIZE="5" MAXLENGTH="5"></td>
+<td WIDTH="20%" ALIGN="center" CLASS="bold"><select NAME=
+"A2">
+<option VALUE="0" selected>Stop Action</option>
+<option VALUE="1" >Shutdown</option>
+<option VALUE="2" >Restart</option>
+<option VALUE="3" >Battery Test</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="10%" ALIGN="center" CLASS="bold">3</td>
+<td WIDTH="28%" ALIGN="center" CLASS="bold"><input NAME=
+"D3" VALUE="00/00/2000" SIZE="10" MAXLENGTH=
+"10"></td>
+<td WIDTH="30%" ALIGN="center" CLASS="bold"><input NAME=
+"T3" VALUE="00:00" SIZE="5" MAXLENGTH="5"></td>
+<td WIDTH="20%" ALIGN="center" CLASS="bold"><select NAME=
+"A3">
+<option VALUE="0" selected>Stop Action</option>
+<option VALUE="1" >Shutdown</option>
+<option VALUE="2" >Restart</option>
+<option VALUE="3" >Battery Test</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="10%" ALIGN="center" CLASS="bold">4</td>
+<td WIDTH="28%" ALIGN="center" CLASS="bold"><input NAME=
+"D4" VALUE="00/00/2000" SIZE="10" MAXLENGTH=
+"10"></td>
+<td WIDTH="30%" ALIGN="center" CLASS="bold"><input NAME=
+"T4" VALUE="00:00" SIZE="5" MAXLENGTH="5"></td>
+<td WIDTH="20%" ALIGN="center" CLASS="bold"><select NAME=
+"A4">
+<option VALUE="0" selected>Stop Action</option>
+<option VALUE="1" >Shutdown</option>
+<option VALUE="2" >Restart</option>
+<option VALUE="3" >Battery Test</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="10%" ALIGN="center" CLASS="bold">5</td>
+<td WIDTH="28%" ALIGN="center" CLASS="bold"><input NAME=
+"D5" VALUE="00/00/2000" SIZE="10" MAXLENGTH=
+"10"></td>
+<td WIDTH="30%" ALIGN="center" CLASS="bold"><input NAME=
+"T5" VALUE="00:00" SIZE="5" MAXLENGTH="5"></td>
+<td WIDTH="20%" ALIGN="center" CLASS="bold"><select NAME=
+"A5">
+<option VALUE="0" selected>Stop Action</option>
+<option VALUE="1" >Shutdown</option>
+<option VALUE="2" >Restart</option>
+<option VALUE="3" >Battery Test</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="10%" ALIGN="center" CLASS="bold">6</td>
+<td WIDTH="28%" ALIGN="center" CLASS="bold"><input NAME=
+"D6" VALUE="00/00/2000" SIZE="10" MAXLENGTH=
+"10"></td>
+<td WIDTH="30%" ALIGN="center" CLASS="bold"><input NAME=
+"T6" VALUE="00:00" SIZE="5" MAXLENGTH="5"></td>
+<td WIDTH="20%" ALIGN="center" CLASS="bold"><select NAME=
+"A6">
+<option VALUE="0" selected>Stop Action</option>
+<option VALUE="1" >Shutdown</option>
+<option VALUE="2" >Restart</option>
+<option VALUE="3" >Battery Test</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="10%" ALIGN="center" CLASS="bold">7</td>
+<td WIDTH="28%" ALIGN="center" CLASS="bold"><input NAME=
+"D7" VALUE="00/00/2000" SIZE="10" MAXLENGTH=
+"10"></td>
+<td WIDTH="30%" ALIGN="center" CLASS="bold"><input NAME=
+"T7" VALUE="00:00" SIZE="5" MAXLENGTH="5"></td>
+<td WIDTH="20%" ALIGN="center" CLASS="bold"><select NAME=
+"A7">
+<option VALUE="0" selected>Stop Action</option>
+<option VALUE="1" >Shutdown</option>
+<option VALUE="2" >Restart</option>
+<option VALUE="3" >Battery Test</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="10%" ALIGN="center" CLASS="bold">8</td>
+<td WIDTH="28%" ALIGN="center" CLASS="bold"><input NAME=
+"D8" VALUE="00/00/2000" SIZE="10" MAXLENGTH=
+"10"></td>
+<td WIDTH="30%" ALIGN="center" CLASS="bold"><input NAME=
+"T8" VALUE="00:00" SIZE="5" MAXLENGTH="5"></td>
+<td WIDTH="20%" ALIGN="center" CLASS="bold"><select NAME=
+"A8">
+<option VALUE="0" selected>Stop Action</option>
+<option VALUE="1" >Shutdown</option>
+<option VALUE="2" >Restart</option>
+<option VALUE="3" >Battery Test</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="10%" ALIGN="center" CLASS="bold">9</td>
+<td WIDTH="28%" ALIGN="center" CLASS="bold"><input NAME=
+"D9" VALUE="00/00/2000" SIZE="10" MAXLENGTH=
+"10"></td>
+<td WIDTH="30%" ALIGN="center" CLASS="bold"><input NAME=
+"T9" VALUE="00:00" SIZE="5" MAXLENGTH="5"></td>
+<td WIDTH="20%" ALIGN="center" CLASS="bold"><select NAME=
+"A9">
+<option VALUE="0" selected>Stop Action</option>
+<option VALUE="1" >Shutdown</option>
+<option VALUE="2" >Restart</option>
+<option VALUE="3" >Battery Test</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="10%" ALIGN="center" CLASS="bold">10</td>
+<td WIDTH="28%" ALIGN="center" CLASS="bold"><input NAME=
+"D10" VALUE="00/00/2000" SIZE="10" MAXLENGTH=
+"10"></td>
+<td WIDTH="30%" ALIGN="center" CLASS="bold"><input NAME=
+"T10" VALUE="00:00" SIZE="5" MAXLENGTH="5"></td>
+<td WIDTH="20%" ALIGN="center" CLASS="bold"><select NAME=
+"A10">
+<option VALUE="0" selected>Stop Action</option>
+<option VALUE="1" >Shutdown</option>
+<option VALUE="2" >Restart</option>
+<option VALUE="3" >Battery Test</option></select></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td COLSPAN="2" WIDTH="38%"></td>
+<td COLSPAN="2" WIDTH="50%"><input TYPE="submit" VALUE="Submit"
+NAME="Submit"></td>
+<td WIDTH="9%"></td></tr></table>
+<br>
+<br></td></tr>
+<tr>
+<td>
+<div CLASS="bottomPage"><a HREF=
+"javascript:history.back()"><img ALT="" SRC=
+"/retour.gif">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <a HREF="#Top"><img ALT="" SRC=
+   "/top.gif">Top</a></div></td></tr>
+<tr>
+<td>
+<div ID="shadowLeft"><img ALT="" SRC=
+"/shadowl.jpg"></div></td></tr></table></div></div>
+</div>
+</form>
+</body>
+</html>

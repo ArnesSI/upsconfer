@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+"http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>UPS Management Web</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT=
+"text/html; charset=iso-8859-1">
+<link REL="SHORTCUT ICON" HREF="/soco.ico">
+<link REL="stylesheet" HREF="/common.css" TYPE="text/css">
+<link REL="stylesheet" HREF="/template.css" TYPE="text/css">
+</head>
+<body>
+<form NAME="net_user" ACTION="/tgi/net_user.tgi" METHOD="post">
+<div ID="userShell" ALIGN="center">
+<div ID="pgSite">
+<div ID="pgContenu">
+<table CLASS="w100p" SUMMARY="">
+<tr CLASS="tdBottom">
+<td ID="logo"><img SRC="/logo_ups.jpg" BORDER=
+"0"></td></tr></table>
+<table ID="menu" SUMMARY="">
+<tr CLASS="tdTop">
+<td>
+<div ID="menuItem"><a HREF="/index.htm">UPS
+Information</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/mgnt_config.htm">UPS
+Management</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/net_user.htm" CLASS=
+'On'>Network</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/hist_log1.htm">UPS
+History</a></div></td>
+<!--<td>
+<div ID="menuItem"><a HREF=
+"/env_sensor.htm">Environment</a></div></td>-->
+<td CLASS="w100p">&nbsp;</td></tr></table>
+<table ID="smenu" SUMMARY="">
+<tr>
+<td><img WIDTH="1" HEIGHT="24" ALT="" SRC="/blank.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_user.htm" CLASS='On'><img ALT=""
+     SRC="/puce_on.gif">User Manager</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_ipconfig.htm"><img ALT=""
+     SRC="/puce_on.gif">System Configuration</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_snmpaccess1.htm"><img ALT=""
+     SRC="/puce_on.gif">SNMPv1 Access Control</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_snmpusm.htm"><img ALT=""
+     SRC="/puce_on.gif">SNMPv3 USM</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_snmptrap.htm"><img ALT=""
+     SRC="/puce_on.gif">SNMP Trap</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_time.htm"><img ALT="" SRC=
+"/puce_on.gif">Time Server</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_mail.htm"><img ALT="" SRC=
+"/puce_on.gif">Mail Server</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_wol.htm"><img ALT="" SRC=
+"/puce_on.gif">Wake On LAN</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td CLASS="w100p">&nbsp;</td></tr></table>
+<table CLASS="w100p" BORDER="0">
+<tr>
+<td HEIGHT="22" ALIGN="right"><b></b>
+System Time: 12/13/2016 Tuesday 15:28:18</td></tr>
+<tr>
+<td WIDTH="100%">
+<table CELLSPACING="5" CELLPADDING="0" WIDTH="100%" HEIGHT="350"
+BORDER="0">
+<tr>
+<td COLSPAN="4" CLASS="title" ALIGN="center">
+Administrator</td></tr>
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="38%" ALIGN="right">Login Account Name:</td>
+<td WIDTH="50%"><input NAME="ADM_A" VALUE="admin"
+       SIZE="8" MAXLENGTH="8"> (8
+       chars max.)</td>
+<td WIDTH="9%"></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Login Password:</td>
+<td><input TYPE="password" NAME="ADM_P" VALUE="mypassword"
+       SIZE="8" MAXLENGTH="8"> (8
+       chars max.)</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Limitation:</td>
+<td><input TYPE="radio" NAME="ADM_L" VALUE="En" > Only
+in This LAN <input TYPE="radio" NAME="ADM_L" VALUE="Dis"
+checked> Allow Any</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td></td>
+<td><input TYPE="submit" VALUE="Submit" NAME="Admin"></td>
+<td></td></tr>
+<tr>
+<td COLSPAN="4" CLASS="title" ALIGN="center">Device
+Manager</td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Login Account Name:</td>
+<td><input NAME="DM_A" VALUE="manager" SIZE="8"
+MAXLENGTH="8"> (8 chars max.)</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Login Password:</td>
+<td><input TYPE="password" NAME="DM_P" VALUE="mypassword"
+       SIZE="8" MAXLENGTH="8"> (8
+       chars max.)</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Limitation:</td>
+<td><input TYPE="radio" NAME="DM_L" VALUE="En" checked> Only in
+This LAN <input TYPE="radio" NAME="DM_L" VALUE="Dis" >
+       Allow Any</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td></td>
+<td><input TYPE="submit" VALUE="Submit" NAME="Device"></td>
+<td></td></tr>
+<tr>
+<td COLSPAN="4" CLASS="title" ALIGN="center">Read Only
+User</td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Login Account Name:</td>
+<td><input NAME="ROU_A" VALUE="user" SIZE="8"
+MAXLENGTH="8"> (8 chars max.)</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Login Password:</td>
+<td><input TYPE="password" NAME="ROU_P" VALUE="mypassword"
+       SIZE="8" MAXLENGTH="8"> (8
+       chars max.)</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Limitation:</td>
+<td><input TYPE="radio" NAME="ROU_L" VALUE="En" checked> Only
+in This LAN <input TYPE="radio" NAME="ROU_L" VALUE="Dis"
+> Allow Any</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td></td>
+<td><input TYPE="submit" VALUE="Submit" NAME="User"></td>
+<td></td></tr></table>
+<br>
+<br></td></tr>
+<tr>
+<td>
+<div CLASS="bottomPage"><a HREF=
+"javascript:history.back()"><img ALT="" SRC=
+"/retour.gif">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <a HREF="#Top"><img ALT="" SRC=
+   "/top.gif">Top</a></div></td></tr>
+<tr>
+<td>
+<div ID="shadowLeft"><img ALT="" SRC=
+"/shadowl.jpg"></div></td></tr></table></div>
+
+</div>
+</div>
+</form>
+</body>
+</html>

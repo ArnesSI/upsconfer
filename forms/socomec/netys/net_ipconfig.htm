@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+"http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>UPS Management Web</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT=
+"text/html; charset=iso-8859-1">
+<link REL="SHORTCUT ICON" HREF="/soco.ico">
+<link REL="stylesheet" HREF="/common.css" TYPE="text/css">
+<link REL="stylesheet" HREF="/template.css" TYPE="text/css">
+</head>
+<body>
+<form NAME="net_ipconfig" ACTION="/tgi/net_ipconfig.tgi"
+      METHOD="post">
+<div ID="userShell" ALIGN="center">
+<div ID="pgSite">
+<div ID="pgContenu">
+<table CLASS="w100p" SUMMARY="">
+<tr CLASS="tdBottom">
+<td ID="logo"><img SRC="/logo_ups.jpg" BORDER=
+"0"></td></tr></table>
+<table ID="menu" SUMMARY="">
+<tr CLASS="tdTop">
+<td>
+<div ID="menuItem"><a HREF="/index.htm">UPS
+Information</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/mgnt_config.htm">UPS
+Management</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/net_user.htm" CLASS=
+'On'>Network</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/hist_log1.htm">UPS
+History</a></div></td>
+<!--<td>
+<div ID="menuItem"><a HREF=
+"/env_sensor.htm">Environment</a></div></td>-->
+<td CLASS="w100p">&nbsp;</td></tr></table>
+<table ID="smenu" SUMMARY="">
+<tr>
+<td><img WIDTH="1" HEIGHT="24" ALT="" SRC="/blank.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_user.htm"><img ALT="" SRC=
+"/puce_on.gif">User Manager</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_ipconfig.htm" CLASS=
+     'On'><img ALT="" SRC="/puce_on.gif">System
+     Configuration</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_snmpaccess1.htm"><img ALT=""
+     SRC="/puce_on.gif">SNMPv1 Access Control</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_snmpusm.htm"><img ALT=""
+     SRC="/puce_on.gif">SNMPv3 USM</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_snmptrap.htm"><img ALT=""
+     SRC="/puce_on.gif">SNMP Trap</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_time.htm"><img ALT="" SRC=
+"/puce_on.gif">Time Server</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_mail.htm"><img ALT="" SRC=
+"/puce_on.gif">Mail Server</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_wol.htm"><img ALT="" SRC=
+"/puce_on.gif">Wake On LAN</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td CLASS="w100p">&nbsp;</td></tr></table>
+<table CLASS="w100p" BORDER="0">
+<tr>
+<td HEIGHT="22" ALIGN="right"><b></b>
+System Time: 12/13/2016 Tuesday 14:04:57</td></tr>
+<tr>
+<td WIDTH="100%">
+<table CELLSPACING="5" CELLPADDING="0" WIDTH="100%" HEIGHT="350"
+BORDER="0">
+<tr>
+<td COLSPAN="4" CLASS="title" ALIGN="center">UPS Web
+Identification</td></tr>
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="38%" ALIGN="right">Host Name(NetBIOS):</td>
+<td WIDTH="50%"><input NAME="SYS_NAM" VALUE="IAMUPS"
+       SIZE="15" MAXLENGTH="15"></td>
+<td WIDTH="9%"></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">System Contactor:</td>
+<td><input NAME="SYS_CON" VALUE="network admin" SIZE="16"
+       MAXLENGTH="16"></td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">System Location:</td>
+<td><input NAME="SYS_LOC" VALUE="closed 22" SIZE="32"
+       MAXLENGTH="32"></td>
+<td></td></tr>
+<tr>
+<td></td>
+<td></td>
+<td><input TYPE="submit" VALUE="Submit" NAME="Submit"></td>
+<td></td></tr>
+<tr>
+<td COLSPAN="4" CLASS="title" ALIGN="center">UPS Web
+Configuration</td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">IP Address:</td>
+<td><input NAME="IP" VALUE="192.168.11.115" SIZE="15" MAXLENGTH=
+"15"></td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Subnet Mask:</td>
+<td><input NAME="SM" VALUE="255.255.255.248" SIZE="15" MAXLENGTH=
+"15"></td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Gateway IP:</td>
+<td><input NAME="GIP" VALUE="192.168.11.114" SIZE="15"
+       MAXLENGTH="15"></td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">DNS or WINS IP:</td>
+<td><input NAME="DIP" VALUE="8.8.8.8" SIZE="15"
+       MAXLENGTH="15"></td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">BOOTP/DHCP Client:</td>
+<td><input TYPE="radio" NAME="DHCP" VALUE="En"
+> Enable <input TYPE="radio" NAME="DHCP"
+VALUE="Dis" checked> Disable</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">HTTP Server:</td>
+<td><input TYPE="radio" NAME="HTTP" VALUE="En"
+checked> Enable <input TYPE="radio" NAME="HTTP"
+       VALUE="Dis" > Disable</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Telnet Server:</td>
+<td><input TYPE="radio" NAME="TELNET" VALUE="En"
+checked> Enable <input TYPE="radio" NAME="TELNET"
+VALUE="Dis" > Disable</td>
+<td></td></tr>
+<!--<tr>
+<td></td>
+<td ALIGN="right">FTP Server:</td>
+<td><input TYPE="radio" NAME="FTP" VALUE="En" >
+       Enable <input TYPE="radio" NAME="FTP" VALUE="Dis"
+       checked> Disable</td>
+<td></td></tr>-->
+<tr>
+<td></td>
+<td ALIGN="right">HTTP Server Port:</td>
+<td><input NAME="HP" VALUE="80" SIZE="5"
+       MAXLENGTH="5"> (Default: 80)</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">Telnet Server Port:</td>
+<td><input NAME="TP" VALUE="23" SIZE="5"
+       MAXLENGTH="5"> (Default: 23)</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">SNMP Get,Set Port:</td>
+<td><input NAME="SP" VALUE="161" SIZE="5"
+       MAXLENGTH="5"> (Default: 161)</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td ALIGN="right">SNMP Trap Port:</td>
+<td><input NAME="AP" VALUE="162" SIZE="5"
+       MAXLENGTH="5"> (Default: 162)</td>
+<td></td></tr>
+<tr>
+<td></td>
+<td></td>
+<td><input TYPE="submit" VALUE="Submit" NAME="Submit"></td>
+<td></td></tr></table>
+<br>
+<br></td></tr>
+<tr>
+<td>
+<div CLASS="bottomPage"><a HREF=
+"javascript:history.back()"><img ALT="" SRC=
+"/retour.gif">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <a HREF="#Top"><img ALT="" SRC=
+   "/top.gif">Top</a></div></td></tr>
+<tr>
+<td>
+<div ID="shadowLeft"><img ALT="" SRC=
+"/shadowl.jpg"></div></td></tr></table></div>
+
+</div>
+</div>
+</form>
+</body>
+</html>

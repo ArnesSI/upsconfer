@@ -1,0 +1,341 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+"http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>UPS Management Web</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT=
+"text/html; charset=iso-8859-1">
+<link REL="SHORTCUT ICON" HREF="/soco.ico">
+<link REL="stylesheet" HREF="/common.css" TYPE="text/css">
+<link REL="stylesheet" HREF="/template.css" TYPE="text/css">
+<script LANGUAGE="javascript" SRC="/md5.js" TYPE="text/javascript">
+</script>
+<script LANGUAGE="javascript" TYPE="text/javascript">
+function calcKey() {
+var strA, strP, strUser;
+var sLevel;
+with(document.net_snmpusm) {  
+        strA=AP.value;
+        strP=PP.value;
+        strUser=US.value;
+        sLevel=SL.value;
+        if(IDX.value==0) {
+                alert("Please specify the item index which you want to modify.");
+                return;
+        }
+        if(sLevel>0 && strUser.length==0) {
+                alert("User name can't be empty.");
+                return;
+        }
+        if(sLevel>0 && strA.length<8) {
+                alert("The length of Auth Password should greater than 8.");
+                return;
+        }
+        if(sLevel==2 && strP.length<8) {
+                alert("The length of Priv Password should greater than 8.");
+                return;
+        }
+        if(sLevel>0)
+                alert("It takes 1 or 2 minutes to generate the keys, please be patient and do not stop the calculation.");
+        if(sLevel>0)
+                AK.value = md5_key(strA,strA.length);
+        if(sLevel==2)
+                PK.value = md5_key(strP,strP.length);
+        submit();
+}
+}
+function fillItems() {
+with(document.net_snmpusm) {
+        if(IDX.value==1) { 
+                US.value=_US1.value;
+                SL.value=_SL1.value;
+        }
+        else if(IDX.value==2) { 
+                US.value=_US2.value;
+                SL.value=_SL2.value;
+        }
+        else if(IDX.value==3) { 
+                US.value=_US3.value;
+                SL.value=_SL3.value;
+        }
+        else if(IDX.value==4) { 
+                US.value=_US4.value;
+                SL.value=_SL4.value;
+        }
+        else if(IDX.value==5) { 
+                US.value=_US5.value;
+                SL.value=_SL5.value;
+        }
+        else if(IDX.value==6) { 
+                US.value=_US6.value;
+                SL.value=_SL6.value;
+        }
+        else if(IDX.value==7) { 
+                US.value=_US7.value;
+                SL.value=_SL7.value;
+        }
+        else if(IDX.value==8) { 
+                US.value=_US8.value;
+                SL.value=_SL8.value;
+        }
+        AP.value="";
+        PP.value="";
+        AK="";
+        PK="";
+}
+}
+</script>
+</head>
+<body>
+<form NAME="net_snmpusm" ACTION="/tgi/net_snmpusm.tgi"
+      METHOD="post">
+<div ID="userShell" ALIGN="center">
+<div ID="pgSite">
+<div ID="pgContenu">
+<table CLASS="w100p" SUMMARY="">
+<tr CLASS="tdBottom">
+<td ID="logo"><img SRC="/logo_ups.jpg" BORDER=
+"0"></td></tr></table>
+<table ID="menu" SUMMARY="">
+<tr CLASS="tdTop">
+<td>
+<div ID="menuItem"><a HREF="/index.htm">UPS
+Information</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/mgnt_config.htm">UPS
+Management</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/net_user.htm" CLASS=
+'On'>Network</a></div></td>
+<td>
+<div ID="menuItem"><a HREF="/hist_log1.htm">UPS
+History</a></div></td>
+<!--<td>
+<div ID="menuItem"><a HREF=
+"/env_sensor.htm">Environment</a></div></td>-->
+<td CLASS="w100p">&nbsp;</td></tr></table>
+<table ID="smenu" SUMMARY="">
+<tr>
+<td><img WIDTH="1" HEIGHT="24" ALT="" SRC="/blank.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_user.htm"><img ALT="" SRC=
+"/puce_on.gif">User Manager</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_ipconfig.htm"><img ALT=""
+     SRC="/puce_on.gif">System Configuration</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_snmpaccess1.htm"><img ALT=""
+     SRC="/puce_on.gif">SNMPv1 Access Control</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_snmpusm.htm" CLASS=
+     'On'><img ALT="" SRC="/puce_on.gif">SNMPv3 USM</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_snmptrap.htm"><img ALT=""
+     SRC="/puce_on.gif">SNMP Trap</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_time.htm"><img ALT="" SRC=
+"/puce_on.gif">Time Server</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_mail.htm"><img ALT="" SRC=
+"/puce_on.gif">Mail Server</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td NOWRAP="nowrap"><a HREF="/net_wol.htm"><img ALT="" SRC=
+"/puce_on.gif">Wake On LAN</a></td>
+<td><img ALT="" SRC="/smenusep.gif"></td>
+<td CLASS="w100p">&nbsp;</td></tr></table>
+<table CLASS="w100p" BORDER="0">
+<tr>
+<td HEIGHT="22" ALIGN="right"><b></b>
+System Time: 12/13/2016 Tuesday 14:05:10</td></tr>
+
+<tr>
+<td WIDTH="100%">
+<table CELLSPACING="5" CELLPADDING="0" WIDTH="100%" HEIGHT="350"
+BORDER="0">
+<tr>
+<td COLSPAN="8" CLASS="title" ALIGN="center">SNMPv3 User
+Table</td></tr>
+<tr>
+<td WIDTH="3%"></td>
+<td COLSPAN="7" CLASS="bold">Auth Protocol: MD5</td></tr>
+<tr>
+<td WIDTH="3%"></td>
+<td COLSPAN="7" CLASS="bold">Priv Protocol: CBC-DES</td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td COLSPAN="7" CLASS="bold">Context Name: <input NAME="CTN"
+       SIZE="8" MAXLENGTH="8" VALUE=""> <input TYPE=
+       "submit" VALUE="Submit" NAME="BCTN"></td></tr>
+
+<tr>
+<td COLSPAN="8">&nbsp;</td></tr>
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center" VALIGN="top" CLASS="bold">Index</td>
+<td WIDTH="17%" ALIGN="center" VALIGN="top" CLASS="bold">User
+Name<br>
+(8 bytes max.)</td>
+<td WIDTH="17%" ALIGN="center" VALIGN="top" CLASS="bold">Security
+Level</td>
+<td WIDTH="17%" ALIGN="center" VALIGN="top" CLASS="bold">Auth
+Password<br>
+(&gt;= 8 bytes)</td>
+<td WIDTH="17%" ALIGN="center" VALIGN="top" CLASS="bold">Priv
+Password<br>
+(&gt;= 8 bytes)</td>
+<td WIDTH="15%" ALIGN="center" VALIGN="top" CLASS="bold">Key</td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">1</td>
+<td WIDTH="17%" ALIGN="center"> <input TYPE="hidden"
+NAME="_US1" VALUE=""></td>
+<td WIDTH="17%" ALIGN="center">noAuth, noPriv <input TYPE="hidden"
+NAME="_SL1" VALUE="0"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="15%" ALIGN="center"></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">2</td>
+<td WIDTH="17%" ALIGN="center"> <input TYPE="hidden"
+NAME="_US2" VALUE=""></td>
+<td WIDTH="17%" ALIGN="center">noAuth, noPriv <input TYPE="hidden"
+NAME="_SL2" VALUE="0"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="15%" ALIGN="center"></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">3</td>
+<td WIDTH="17%" ALIGN="center"> <input TYPE="hidden"
+NAME="_US3" VALUE=""></td>
+<td WIDTH="17%" ALIGN="center">noAuth, noPriv <input TYPE="hidden"
+NAME="_SL3" VALUE="0"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="15%" ALIGN="center"></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">4</td>
+<td WIDTH="17%" ALIGN="center"> <input TYPE="hidden"
+NAME="_US4" VALUE=""></td>
+<td WIDTH="17%" ALIGN="center">noAuth, noPriv <input TYPE="hidden"
+NAME="_SL4" VALUE="0"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="15%" ALIGN="center"></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">5</td>
+<td WIDTH="17%" ALIGN="center"> <input TYPE="hidden"
+NAME="_US5" VALUE=""></td>
+<td WIDTH="17%" ALIGN="center">noAuth, noPriv <input TYPE="hidden"
+NAME="_SL5" VALUE="0"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="15%" ALIGN="center"></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">6</td>
+<td WIDTH="17%" ALIGN="center"> <input TYPE="hidden"
+NAME="_US6" VALUE=""></td>
+<td WIDTH="17%" ALIGN="center">noAuth, noPriv <input TYPE="hidden"
+NAME="_SL6" VALUE="0"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="15%" ALIGN="center"></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">7</td>
+<td WIDTH="17%" ALIGN="center"> <input TYPE="hidden"
+NAME="_US7" VALUE=""></td>
+<td WIDTH="17%" ALIGN="center">noAuth, noPriv <input TYPE="hidden"
+NAME="_SL7" VALUE="0"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="15%" ALIGN="center"></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center">8</td>
+<td WIDTH="17%" ALIGN="center"> <input TYPE="hidden"
+NAME="_US8" VALUE=""></td>
+<td WIDTH="17%" ALIGN="center">noAuth, noPriv <input TYPE="hidden"
+NAME="_SL8" VALUE="0"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="17%" ALIGN="center"></td>
+<td WIDTH="15%" ALIGN="center"></td>
+<td WIDTH="9%"></td></tr>
+
+<tr>
+<td COLSPAN="8">&nbsp;</td></tr>
+<tr>
+<td COLSPAN="8" CLASS="title" ALIGN="center">Modification</td></tr>
+
+<tr>
+<td WIDTH="3%"></td>
+<td WIDTH="5%" ALIGN="center" CLASS="bold">
+        <select ONCHANGE="fillItems();" NAME="IDX">
+<option VALUE="0"></option>
+<option VALUE="1">1</option>
+<option VALUE="2">2</option>
+<option VALUE="3">3</option>
+<option VALUE="4">4</option>
+<option VALUE="5">5</option>
+<option VALUE="6">6</option>
+<option VALUE="7">7</option>
+<option VALUE="8">8</option></select></td>
+<td WIDTH="17%" ALIGN="center" CLASS="bold"><input NAME="US"
+       SIZE="8" MAXLENGTH="8"></td>
+<td WIDTH="17%" ALIGN="center" CLASS="bold"><select NAME="SL">
+<option VALUE="0">noAuth, noPriv</option>
+<option VALUE="1">Auth, noPriv</option>
+<option VALUE="2">Auth, Priv</option></select></td>
+<td WIDTH="17%" ALIGN="center" CLASS="bold"><input TYPE="password"
+NAME="AP" SIZE="16" MAXLENGTH="16"></td>
+<td WIDTH="17%" ALIGN="center" CLASS="bold"><input TYPE="password"
+NAME="PP" SIZE="16" MAXLENGTH="16"></td>
+<td WIDTH="15%" ALIGN="center"><input ONCLICK=
+"calcKey(); return false;" TYPE="submit" VALUE="Submit Key"
+       NAME="GK"> <input TYPE="hidden" NAME="AK" SIZE="32"
+       MAXLENGTH="32"> <input TYPE="hidden" NAME="PK" SIZE="32"
+       MAXLENGTH="32"></td>
+<td WIDTH="9%"></td></tr>
+<tr>
+<td COLSPAN="8" ALIGN="center"><input TYPE="submit" VALUE=
+"Reset SNMPv3 Configuration" NAME="RS"></td></tr>
+
+<tr>
+<td COLSPAN="8">&nbsp;</td></tr></table>
+<br>
+<br></td></tr>
+<tr>
+<td>
+<div CLASS="bottomPage"><a HREF=
+"javascript:history.back()"><img ALT="" SRC=
+"/retour.gif">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <a HREF="#Top"><img ALT="" SRC=
+   "/top.gif">Top</a></div></td></tr>
+<tr>
+<td>
+<div ID="shadowLeft"><img ALT="" SRC=
+"/shadowl.jpg"></div></td></tr></table></div></div>
+</div>
+</form>
+</body>
+</html>
