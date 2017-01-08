@@ -21,6 +21,7 @@
 ########################################################################
 
 
+import re
 import requests
 from hashlib import md5
 import lxml.html
@@ -191,3 +192,105 @@ class UpsSocomecNetys(UpsGeneric):
         response.raise_for_status()
         html = lxml.html.document_fromstring(response.text)
         return html
+
+
+class UpsSocomecMasterys(UpsGeneric):
+    MAP_ACCESS = {
+        '1': 'ro',
+        '2': 'rw',
+        '3': 'none'
+    }
+
+    def __init__(self, *args, **kwargs):
+        self.auth = None
+        super(UpsSocomecMasterys, self).__init__(*args, **kwargs)
+
+    def login(self):
+        # not an actual login, use http basic auth on every request
+        self.auth = (self.user, self.password)
+        response = requests.get('http://%s/PageMonComprehensive.html' % self.host, auth=self.auth)
+        if not response.ok:
+            raise LoginFailure()
+        return True
+
+    def get_snmp_config(self):
+        """
+        forms/socomec/masterys/PageAdmAgentAccess.html
+        """
+        response = requests.get('http://%s/PageAdmAgentAccess.html' % self.host, auth=self.auth)
+        response.raise_for_status()
+        html = lxml.html.document_fromstring(response.text)
+        xp_ip = '//input[@name="XAAAAAAA{nr}AADE"]/@value'
+        xp_community = '//input[@name="XAAAAAAA{nr}AADF"]/@value'
+        xp_access = '//select[@name="XAAAAAAA{nr}AADG"]/option[@selected]/@value'
+        config = {}
+        idx = 1
+        for i in char_range('B', 'I'):
+            config[str(idx)] = {'ip': get_list_item(html.xpath(xp_ip.format(nr=i)), 0, '')}
+            config[str(idx)]['community'] = html.xpath(xp_community.format(nr=i))[0]
+            config[str(idx)]['access'] = self.MAP_ACCESS.get(html.xpath(xp_access.format(nr=i))[0], 'none')
+            idx += 1
+        # change the last entry into a default
+        last_idx = str(idx-1)
+        last_entry = config[last_idx]
+        del(last_entry['ip'])
+        config['default'] = last_entry
+        del(config[last_idx])
+        return config
+
+    def get_trap_config(self):
+        """
+        forms/socomec/masterys/PageAdmAgentTrap.html
+        """
+        response = requests.get('http://%s/PageAdmAgentTrap.html' % self.host, auth=self.auth)
+        response.raise_for_status()
+        html = lxml.html.document_fromstring(response.text)
+        xp_ip = '//input[@name="XAAAAAAA{nr}AAFE"]/@value'
+        xp_community = '//input[@name="XAAAAAAA{nr}AAFF"]/@value'
+        xp_type = '//select[@name="XAAAAAAA{nr}AAFJ"]/option[@selected]/@value'
+        xp_alias = '//input[@name="XAAAAAAA{nr}AAFG"]/@value'
+        config = {}
+        idx = 1
+        for i in char_range('B', 'I'):
+            entry = {'ip': get_list_item(html.xpath(xp_ip.format(nr=i)), 0, '')}
+            entry['community'] = html.xpath(xp_community.format(nr=i))[0]
+            type_device = get_list_item(html.xpath(xp_type.format(nr=i)), 0, '2')
+            if type_device == '3':
+                entry['severity'] = 'info'
+                entry['type'] = 'rfc'
+            elif type_device == '2':
+                entry['severity'] = 'info'
+                entry['type'] = 'proprietary'
+            else:
+                entry['severity'] = 'none'
+                entry['type'] = 'rfc'
+            entry['alias'] = get_list_item(html.xpath(xp_alias.format(nr=i)), 0, '')
+            config[str(idx)] = entry
+            idx += 1
+        return config
+
+    def get_info(self):
+        """
+        forms/socomec/modulys/PageMonIdentification.html
+        """
+        response = requests.get('http://%s/PageMonIdentification.html' % self.host, auth=self.auth)
+        response.raise_for_status()
+        html = lxml.html.document_fromstring(response.text)
+        xpaths = {
+            'model': '//td/*[text()="UPS Model"]/../following-sibling::td//td/*/text()',
+            'serial': '//td/*[text()="UPS Serial Number"]/../following-sibling::td//td/*/text()',
+            'firmware': '//td/*[text()="UPS Firmware Release"]/../following-sibling::td//td/*/text()',
+            'agent_firmware': '//td/*[text()="UPS Agent Version"]/../following-sibling::td//td/*/text()',
+        }
+        info = {}
+        info['manufacturer'] = 'Socomec'
+        info['agent_type'] = 'NetVision'
+        for k, xpath in xpaths.items():
+            info[k] = html.xpath(xpath)[0]
+        if info.get('agent_firmware'):
+            m = re.search(r'v(\d\S+)(?:\s\(\S*\s*(\S+)\))', info['agent_firmware'])
+            if m:
+                info['agent_firmware'] = m.group(1)
+                if m.group(2):
+                    info['agent_serial'] = m.group(2)
+        return info
