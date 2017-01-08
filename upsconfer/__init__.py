@@ -21,4 +21,4 @@
 ########################################################################
 
 
-from .socomec import UpsSocomec
+from .socomec import UpsSocomecNetys

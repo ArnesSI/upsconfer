@@ -22,20 +22,24 @@
 
 
 import requests
-import re
 from hashlib import md5
 import lxml.html
 from upsconfer.exceptions import LoginFailure, SerialNotFound
 from upsconfer.generic import UpsGeneric
 
 
-class UpsSocomec(UpsGeneric):
+class UpsSocomecNetys(UpsGeneric):
     def login(self):
-        login_page = requests.get('http://%s/' % self.host)
-        m = re.search('NAME="Challenge" VALUE=\n"([^"]+)"', login_page.text, re.MULTILINE)
-        if not m:
-            raise LoginFailure()
-        challenge = m.group(1)
+        """
+        forms/socomec/netys/login.htm
+        """
+        response = requests.get('http://%s/' % self.host)
+        response.raise_for_status()
+        html = lxml.html.document_fromstring(response.text)
+        xp_challenge = '//input[@name="Challenge"]/@value'
+        challenge = html.xpath(xp_challenge)[0]
+        if not challenge:
+            LoginFailure('Could not find challenge.')
         ch_str = '%s%s%s' % (self.user, self.password, challenge)
         response = md5(ch_str).hexdigest()
         data = {
@@ -44,13 +48,16 @@ class UpsSocomec(UpsGeneric):
             'Challenge': '',
             'Response': response
             }
-        login_response = requests.post('http://%s/tgi/login.tgi' % self.host, data)
-        if not login_response.ok:
+        response = requests.post('http://%s/tgi/login.tgi' % self.host, data)
+        if not response.ok:
             raise LoginFailure()
-        self.cookies = login_response.cookies
+        self.cookies = response.cookies
         return True
 
     def get_snmp_config(self):
+        """
+        forms/socomec/netys/net_snmpaccess1.htm
+        """
         response = requests.get('http://%s/net_snmpaccess1.htm' % self.host, cookies=self.cookies)
         response.raise_for_status()
         html = lxml.html.document_fromstring(response.text)
@@ -59,46 +66,45 @@ class UpsSocomec(UpsGeneric):
         xp_access = '//select[@name="PE{nr}"]/option[@selected]/@value'
         norm_ip = lambda addr: '.'.join([str(int(o)) for o in addr.split('.')])
         config = {}
-        config['1'] = {'ip': '0.0.0.0'}
-        config['1']['community'] = html.xpath(xp_community.format(nr=1))[0]
-        config['1']['access'] = html.xpath(xp_access.format(nr=1))[0]
+        config['default'] = {'ip': '0.0.0.0'}
+        config['default']['community'] = html.xpath(xp_community.format(nr=1))[0]
+        config['default']['access'] = html.xpath(xp_access.format(nr=1))[0]
         for i in range(2, 9):
-            config[str(i)] = {'ip': norm_ip(html.xpath(xp_ip.format(nr=i))[0])}
-            config[str(i)]['community'] = html.xpath(xp_community.format(nr=i))[0]
-            config[str(i)]['access'] = html.xpath(xp_access.format(nr=i))[0]
+            config[str(i-1)] = {'ip': norm_ip(html.xpath(xp_ip.format(nr=i))[0])}
+            config[str(i-1)]['community'] = html.xpath(xp_community.format(nr=i))[0]
+            config[str(i-1)]['access'] = html.xpath(xp_access.format(nr=i))[0]
         return config
 
     def set_snmp_config(self, new_config):
+        """
+        Form structure:
+        CO1: <default->community>
+        PE1: <default->access>[valid values: none|ro|rw]
+        NM2: <1->ip>
+        CO2: <1->community>
+        PE2: <1->access>
+        ...
+        PE8: <7->access>
+        """
         config = self.get_snmp_config()
         config.update(new_config)
         data = {}
-        data['CO1'] = config['1']['community']
-        data['PE1'] = config['1']['access']
+        data['CO1'] = config['default']['community']
+        data['PE1'] = config['default']['access']
         for i in range(2, 9):
-            data['NM%d' % i] = config[str(i)]['ip']
-            data['CO%d' % i] = config[str(i)]['community']
-            data['PE%d' % i] = config[str(i)]['access']
+            data['NM%d' % i] = config[str(i-1)]['ip']
+            data['CO%d' % i] = config[str(i-1)]['community']
+            data['PE%d' % i] = config[str(i-1)]['access']
         response = requests.post('http://%s/tgi/net_snmpaccess1.tgi' % self.host,
-            cookies=self.cookies,
-            data=data)
+                                 cookies=self.cookies,
+                                 data=data)
         response.raise_for_status()
         return True
 
-    '''
-    NMS1:<ip>
-    COM1:<community>
-    PER1:<severity>[non|inf|war|sev]
-    TTT1:<version>[0|1](SNMPv1|SNMPv2c)
-    TYP1:<type>[v4|rfc](DV4|RFC1628)
-    NMS2:0.0.0.0
-    COM2:
-    PER2:non
-    TTT2:0
-    TYP2:v4
-    ...
-    TYP8:v4
-    '''
     def get_trap_config(self):
+        """
+        forms/socomec/netys/net_snmptrap.htm
+        """
         response = requests.get('http://%s/net_snmptrap.htm' % self.host, cookies=self.cookies)
         response.raise_for_status()
         html = lxml.html.document_fromstring(response.text)
@@ -117,29 +123,77 @@ class UpsSocomec(UpsGeneric):
         return config
 
     def set_trap_config(self, new_config):
+        """
+        Form structure:
+        NMS1:<1->ip>
+        COM1:<1->community>
+        PER1:<1->severity>[valid values: non|inf|war|sev (none|info|warn|crit)]
+        TTT1:<1->version>[valid values: 0|1 (1|2)]
+        TYP1:<1->type>[valid values: v4|rfc (proprietary|rfc)]
+        NMS2:<2->ip>
+        ...
+        TYP8:<8->type>
+        Submit: Submit
+        """
+        map_sev_per = {
+            'none': 'non',
+            'info': 'inf',
+            'warn': 'war',
+            'crit': 'sec'
+        }
+        map_ver_ttt = {
+            '1': '0',
+            '2': '1'
+        }
+        map_type_typ = {
+            'proprietary': 'v4',
+            'rfc': 'rfc'
+        }
         config = self.get_snmp_config()
         config.update(new_config)
         data = {'Submit': 'Submit'}
         for i in range(1, 9):
             data['NMS%d' % i] = config[str(i)]['ip']
             data['COM%d' % i] = config[str(i)]['community']
-            data['PER%d' % i] = config[str(i)]['severity']
-            data['TTT%d' % i] = config[str(i)]['version']
-            data['TYP%d' % i] = config[str(i)]['type']
+            data['PER%d' % i] = map_sev_per.get((config[str(i)]['severity']), 'non')
+            data['TTT%d' % i] = map_ver_ttt.get(config[str(i)]['version'], '1')
+            data['TYP%d' % i] = map_type_typ.get(config[str(i)]['type'], 'rfc')
         response = requests.post('http://%s/tgi/net_trapaccess.tgi' % self.host,
-            cookies=self.cookies,
-            data=data)
+                                 cookies=self.cookies,
+                                 data=data)
         response.raise_for_status()
         return True
 
     def get_serial(self):
-        txt = self._get_info_text()
-        m = re.search('Serial Number:</td>\n<td WIDTH="50%" CLASS="bold">([^<]+)', txt, re.MULTILINE)
-        if not m:
+        info = self.get_info()
+        serial = info.get('serial')
+        if not serial:
             raise SerialNotFound()
-        return m.group(1)
+        return serial
 
-    def _get_info_text(self):
+    def get_info(self):
+        """
+        forms/socomec/netys/info_ident.htm
+        """
+        html = self._get_info_html()
+        xpaths = {
+            'model': '//td[text()="Model:"]/following-sibling::td/text()',
+            'serial':'//td[text()="Serial Number:"]/following-sibling::td/text()',
+            'firmware': '//td[text()="UPS Firmware:"]/following-sibling::td/text()',
+            'agent_firmware': '//td[text()="Web Firmware:"]/following-sibling::td/text()',
+            'rating_va': '//td[text()="Rating VA:"]/following-sibling::td/text()',
+        }
+        info = {}
+        info['manufacturer'] = 'Socomec'
+        info['agent_type'] = 'NetVision'
+        for k, xpath in xpaths.items():
+            info[k] = html.xpath(xpath)[0]
+        info['rating_va'] = info['rating_va'].split(' ')[0]
+        return info
+
+    def _get_info_html(self):
         response = requests.get('http://%s/info_ident.htm' % self.host, cookies=self.cookies)
         response.raise_for_status()
-        return response.text
+        html = lxml.html.document_fromstring(response.text)
+        return html
+
