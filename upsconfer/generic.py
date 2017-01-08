@@ -24,6 +24,8 @@
 Generic class that vendor specific classes should inherit from.
 """
 
+from upsconfer.exceptions import SerialNotFound
+
 
 class UpsGeneric(object):
     def __init__(self, host, user, password):
@@ -119,7 +121,11 @@ class UpsGeneric(object):
         """
         :return: device serial number as a string
         """
-        raise NotImplementedError()
+        info = self.get_info()
+        serial = info.get('serial')
+        if not serial:
+            raise SerialNotFound()
+        return serial
 
     def get_info(self):
         """

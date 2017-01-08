@@ -24,11 +24,27 @@
 import requests
 from hashlib import md5
 import lxml.html
-from upsconfer.exceptions import LoginFailure, SerialNotFound
+from upsconfer.exceptions import LoginFailure
 from upsconfer.generic import UpsGeneric
+from upsconfer.util import char_range, get_list_item, get_dict_key
 
 
 class UpsSocomecNetys(UpsGeneric):
+    MAP_SEV_PER = {
+        'none': 'non',
+        'info': 'inf',
+        'warn': 'war',
+        'crit': 'sec'
+    }
+    MAP_VER_TTT = {
+        '1': '0',
+        '2': '1'
+    }
+    MAP_TYPE_TYP = {
+        'proprietary': 'v4',
+        'rfc': 'rfc'
+    }
+
     def login(self):
         """
         forms/socomec/netys/login.htm
@@ -117,9 +133,9 @@ class UpsSocomecNetys(UpsGeneric):
         for i in range(1, 9):
             config[str(i)] = {'ip': html.xpath(xp_ip.format(nr=i))[0]}
             config[str(i)]['community'] = html.xpath(xp_community.format(nr=i))[0]
-            config[str(i)]['severity'] = html.xpath(xp_severity.format(nr=i))[0]
-            config[str(i)]['version'] = html.xpath(xp_ver.format(nr=i))[0]
-            config[str(i)]['type'] = html.xpath(xp_type.format(nr=i))[0]
+            config[str(i)]['severity'] = get_dict_key(self.MAP_SEV_PER, html.xpath(xp_severity.format(nr=i))[0])
+            config[str(i)]['version'] = get_dict_key(self.MAP_VER_TTT, html.xpath(xp_ver.format(nr=i))[0])
+            config[str(i)]['type'] = get_dict_key(self.MAP_TYPE_TYP, html.xpath(xp_type.format(nr=i))[0])
         return config
 
     def set_trap_config(self, new_config):
@@ -135,41 +151,20 @@ class UpsSocomecNetys(UpsGeneric):
         TYP8:<8->type>
         Submit: Submit
         """
-        map_sev_per = {
-            'none': 'non',
-            'info': 'inf',
-            'warn': 'war',
-            'crit': 'sec'
-        }
-        map_ver_ttt = {
-            '1': '0',
-            '2': '1'
-        }
-        map_type_typ = {
-            'proprietary': 'v4',
-            'rfc': 'rfc'
-        }
         config = self.get_snmp_config()
         config.update(new_config)
         data = {'Submit': 'Submit'}
         for i in range(1, 9):
             data['NMS%d' % i] = config[str(i)]['ip']
             data['COM%d' % i] = config[str(i)]['community']
-            data['PER%d' % i] = map_sev_per.get((config[str(i)]['severity']), 'non')
-            data['TTT%d' % i] = map_ver_ttt.get(config[str(i)]['version'], '1')
-            data['TYP%d' % i] = map_type_typ.get(config[str(i)]['type'], 'rfc')
+            data['PER%d' % i] = self.MAP_SEV_PER.get((config[str(i)]['severity']), 'non')
+            data['TTT%d' % i] = self.MAP_VER_TTT.get(config[str(i)]['version'], '1')
+            data['TYP%d' % i] = self.MAP_TYPE_TYP.get(config[str(i)]['type'], 'rfc')
         response = requests.post('http://%s/tgi/net_trapaccess.tgi' % self.host,
                                  cookies=self.cookies,
                                  data=data)
         response.raise_for_status()
         return True
-
-    def get_serial(self):
-        info = self.get_info()
-        serial = info.get('serial')
-        if not serial:
-            raise SerialNotFound()
-        return serial
 
     def get_info(self):
         """
@@ -196,4 +191,3 @@ class UpsSocomecNetys(UpsGeneric):
         response.raise_for_status()
         html = lxml.html.document_fromstring(response.text)
         return html
-
