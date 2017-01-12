@@ -22,3 +22,4 @@
 
 
 from .socomec import UpsSocomecNetys, UpsSocomecMasterys
+from .riello import UpsRielloSentinel

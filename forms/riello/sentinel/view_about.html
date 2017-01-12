@@ -1,0 +1,694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>NetMan 204</title>
+<script type="text/javascript" src="view_about_files/jquery-1.js"></script>
+<script type="text/javascript" src="view_about_files/menu.js"></script>
+
+<style>
+h1{
+font-size:2.85em;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+background-color:#666666;
+color:#FFFFFF;
+padding: 0.1em 2em; 
+box-shadow: 7px 7px 8px #818181;
+-webkit-box-shadow: 7px 7px 8px #818181;
+-moz-box-shadow: 7px 7px 8px #818181;
+filter: progid:DXImageTransform.Microsoft.dropShadow(color=#818181, offX=7, offY=7, positive=true);
+
+margin: 0
+}
+
+h2{
+padding: 0.1em 2em; 
+--clear: both;
+background-color:#DDDDDD;
+line-height:2.5em;
+box-shadow: 7px 7px 8px #818181;
+-webkit-box-shadow: 7px 7px 8px #818181;
+-moz-box-shadow: 7px 7px 8px #818181;
+filter: progid:DXImageTransform.Microsoft.dropShadow(color=#818181, offX=7, offY=7, positive=true);
+}
+
+h3{
+margin:0;
+padding:0;
+border:0;
+background-color:#777777;
+color:#777777;
+font-size:1.0em;
+line-height:1.5em;
+
+box-shadow: 7px 7px 8px #818181;
+-webkit-box-shadow: 7px 7px 8px #818181;
+-moz-box-shadow: 7px 7px 8px #818181;
+filter: progid:DXImageTransform.Microsoft.dropShadow(color=#818181, offX=7, offY=7, positive=true);
+
+}
+
+h4{
+margin: 10px 10px 10px 10px;
+padding: 10px;
+background-color: #fddb6f;
+
+
+color:#000;
+font-size:1.4em;
+line-height:1.5em;
+
+}
+
+h4 a {
+color:#000;
+}
+
+h4.gray {
+background-color: #aaa;
+}
+
+h4.green {
+background-color: #7b7be7;
+}
+
+h4.yellow {
+background-color: #ff2;
+}
+
+h4.red {
+background-color: #f22;
+}
+
+body{
+font-size:0.85em;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+
+#nav, #nav ul{
+margin:0;
+padding:0;
+list-style-type:none;
+list-style-position:outside;
+position:relative;
+line-height:1.5em; 
+}
+
+#nav a{
+display:block;
+padding:0px 5px;
+--border:1px solid #333;
+color:#fff;
+text-decoration:none;
+background-color:#777777;
+}
+
+#nav a:hover{
+background-color:#fff;
+color:#333;
+opacity: 1;
+}
+
+#nav li{
+float:left;
+position:relative;
+}
+
+#nav ul {
+position:absolute;
+display:none;
+width:12em;
+top:1.5em;
+}
+
+#nav li ul a{
+width:12em;
+height:auto;
+float:left;
+opacity: 0.95;
+box-shadow: 7px 7px 8px #818181;
+-webkit-box-shadow: 7px 7px 8px #818181;
+-moz-box-shadow: 7px 7px 8px #818181;
+filter: progid:DXImageTransform.Microsoft.dropShadow(color=#818181, offX=7, offY=7, positive=true);
+
+
+}
+
+#nav ul ul{
+top:auto;
+}	
+
+#nav li ul ul {
+left:12em;
+margin:0px 0 0 10px;
+}
+
+#nav li:hover ul ul, #nav li:hover ul ul ul, #nav li:hover ul ul ul ul{
+display:none;
+}
+#nav li:hover ul, #nav li li:hover ul, #nav li li li:hover ul, #nav li li li li:hover ul{
+display:block;
+}
+
+#content {
+clear: both;
+}
+
+
+.feedbackform{
+padding: 5px;
+clear: both;
+}
+
+div.sbox{
+margin-left: 20px;
+}
+
+div.fieldwrapper{ /*field row DIV (includes two columns- Styled label column and 'thefield' column)*/
+width: 550px; /*width of form rows*/
+overflow: hidden;
+padding: 5px 0;
+}
+
+div.fieldwrapper label.styled{ /* label elements that should be styled (left column within fieldwrapper DIV) */
+float: left;
+width: 150px; /*width of label (left column)*/
+text-transform: uppercase;
+border-bottom: 1px solid red;
+margin-right: 15px; /*spacing with right column*/
+}
+
+div.fieldwrapper div.thefield{ /* DIV that wraps around the actual form fields (right column within fieldwrapper DIV) */
+float: left;
+margin-bottom: 10px; /* space following the field */
+}
+
+div.fieldwrapper div.thefield input[type="text"]{ /* style for INPUT type="text" fields. Has no effect in IE7 or below! */
+width: 250px;
+}
+
+div.fieldwrapper div.thefield textarea{ /* style for TEXTAREA fields. */
+width: 300px;
+height: 150px;
+}
+
+div.buttonsdiv{ /*div that wraps around the submit/reset buttons*/
+margin-top: 65px; /*space above buttonsdiv*/
+}
+
+div.buttonsdiv input{ /* style for INPUT fields within 'buttonsdiv'. Assumed to be form buttons. */
+width: 80px;
+xxxbackground: #e1dfe0;
+background-color: #ffb94b;
+background-image: -webkit-gradient(linear, left top, left bottom, from(#fddb6f), to(#ffb94b));
+background-image: -webkit-linear-gradient(top, #fddb6f, #ffb94b);
+background-image: -moz-linear-gradient(top, #fddb6f, #ffb94b);
+background-image: -ms-linear-gradient(top, #fddb6f, #ffb94b);
+background-image: -o-linear-gradient(top, #fddb6f, #ffb94b);
+background-image: linear-gradient(top, #fddb6f, #ffb94b);
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+border-radius: 3px;
+text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+-moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+
+border-width: 1px;
+border-style: solid;
+border-color: #d69e31 #e3a037 #d5982d #e3a037;
+
+height: 35px;
+width: 120px;
+xfont: bold 15px Arial, Helvetica;
+color: #8f5a0a;
+cursor: pointer;
+
+}
+
+div.sensordev{
+padding: 10px;
+background-color: #AAFFAA;
+display: block;
+border-bottom: 1px solid #22AA22;
+margin: 20px;
+}
+
+table{
+text-align: left; width: 40%;
+}
+
+table.alarm {
+		border-collapse:collapse;
+background-image: linear-gradient(top, #FFFFFF 0%, #FFFFFF 50%, #f66 100%);
+background-image: -o-linear-gradient(top, #FFFFFF 0%, #FFFFFF 50%, #f66 100%);
+background-image: -moz-linear-gradient(top, #FFFFFF 0%, #FFFFFF 50%, #f66 100%);
+background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #FFFFFF 50%, #f66 100%);
+background-image: -ms-linear-gradient(top, #FFFFFF 0%, #FFFFFF 50%, #f66 100%);
+
+background-image: -webkit-gradient(
+	linear,
+	left top,
+	left bottom,
+	color-stop(0, #FFFFFF),
+	color-stop(0.5, #FFFFFF),
+	color-stop(1, #D0FFBD)
+);
+		border-left:1px solid #686868;
+		border-right:1px solid #686868;
+		font:0.8em/145% 'Trebuchet MS',helvetica,arial,verdana;
+		color: #333;
+}
+
+table.alarm td, th {
+		text-align: center;
+		padding:5px;
+}
+
+table.grid3 td, th {
+border-bottom: none;
+font-size: 1.0em;
+}
+
+table.logdata{
+                width: 1250px;
+                border-collapse:collapse;
+                border-left:1px solid #686868;
+                border-right:1px solid #686868;
+                font:0.8em/145% 'Trebuchet MS',helvetica,arial,verdana;
+                color: #333;
+}
+table.logdata td, th {
+                text-align: center;
+                #padding:5px;
+}
+
+
+table.devicedata {
+		border-collapse:collapse;
+		border-left:1px solid #686868;
+		border-right:1px solid #686868;
+		font:0.8em/145% 'Trebuchet MS',helvetica,arial,verdana;
+		color: #333;
+}
+
+table.devicedata td, th {
+		text-align: center;
+		padding:5px;
+}
+
+tr.viewheader {
+background-color: #A6DBFF;
+border-top: solid 1px #686868;
+border-bottom: transparent;
+font-weight: bold;
+}
+
+tr.viewseparator {
+background-image: linear-gradient(bottom, #000000 0%, #858585 80%);
+background-image: -o-linear-gradient(bottom, #fff 0%, #ccc 80%);
+background-image: -moz-linear-gradient(bottom, #fff 0%, #ccc 80%);
+background-image: -webkit-linear-gradient(bottom, #fff 0%, #ccc 80%);
+background-image: -ms-linear-gradient(bottom, #fff 0%, #ccc 80%);
+}
+
+caption {
+		padding: 0 0 .5em 0;
+		text-align: left;
+		font-size: 1.4em;
+		font-weight: bold;
+		text-transform: uppercase;
+		color: #333;
+		background: transparent;
+}
+
+/* =links
+----------------------------------------------- */
+table.logdata a {
+                color:#950000;
+                text-decoration:none;
+}
+
+table.logdata a:link {}
+
+table.logdata a:visited {
+                font-weight:normal;
+                color:#666;
+                text-decoration: line-through;
+}
+
+table.logdata a:hover {
+                border-bottom: 1px dashed #bbb;
+}
+
+table.devicedata a {
+		color:#950000;
+		text-decoration:none;
+}
+
+table.devicedata a:link {}
+
+table.devicedata a:visited {
+		font-weight:normal;
+		color:#666;
+		text-decoration: line-through;
+}
+
+table.devicedata a:hover {
+		border-bottom: 1px dashed #bbb;
+}
+
+/* =head =foot
+----------------------------------------------- */
+
+table.alarm thead th, tfoot th, tfoot td {
+background-image: linear-gradient(bottom, #000000 0%, #858585 80%);
+background-image: -o-linear-gradient(bottom, #000000 0%, #858585 80%);
+background-image: -moz-linear-gradient(bottom, #000000 0%, #858585 80%);
+background-image: -webkit-linear-gradient(bottom, #000000 0%, #858585 80%);
+background-image: -ms-linear-gradient(bottom, #000000 0%, #858585 80%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, #000000),
+	color-stop(0.8, #858585)
+);
+		color:#fff
+}
+table.logdata thead th, tfoot th, tfoot td {
+background-color: #333399;
+                color:#fff
+}
+
+table.logdata tfoot td {
+                text-align:right
+}
+
+/* =body
+----------------------------------------------- */
+
+table.logdata tbody th, tbody td , thead {
+                border-bottom: solid 1px #333;
+                font-size: 1.3em;
+}
+
+table.logdata tbody th {
+                white-space: nowrap;
+}
+
+table.logdata tbody th a {
+                color:#333;
+}
+
+.odd {}
+
+table.logdata tbody tr:hover {
+                background:#fafafa
+}
+
+table.devicedata thead th, tfoot th, tfoot td {
+background-color: #333399;
+		color:#fff
+}
+
+table.devicedata tfoot td {
+		text-align:right
+}
+
+/* =body
+----------------------------------------------- */
+
+table.devicedata tbody th, tbody td , thead {
+		border-bottom: solid 1px #333;
+		font-size: 1.3em;
+}
+
+table.devicedata tbody th {
+		white-space: nowrap;
+}
+
+table.devicedata tbody th a {
+		color:#333;
+}
+
+.odd {}
+
+table.devicedata tbody tr:hover {
+		background:#fafafa
+}
+
+table.batcontainer td {
+		border-bottom: none;
+	
+}
+
+
+/************************************/
+
+#container {
+  margin: 0 auto;
+  width: 250px;
+
+}
+
+.ui-progress-bar {
+  margin-top: 1em;
+  margin-bottom: 1em;
+} 
+
+.ui-progress span.ui-label {
+  font-size: 1.2em;
+  position: absolute;
+  right: 0;
+  line-height: 33px;
+  padding-right: 12px;
+  color: rgba(0,0,0,0.6);
+  text-shadow: rgba(255,255,255, 0.45) 0 1px 0px;
+  white-space: nowrap;
+}
+
+
+   
+
+.ui-progress-bar {
+  position: relative;
+  height: 20px;
+  padding-right: 2px;
+  background-color: #abb2bc;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #b6bcc6), color-stop(1, #9da5b0));
+  background: -moz-linear-gradient(#9da5b0 0%, #b6bcc6 100%);
+  -webkit-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px #FFF;
+  -moz-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px #FFF;
+  box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px #FFF;
+}        
+
+.ui-progress {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 18px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-background-size: 44px 44px;
+  background-color: #7b7be7;
+  border: 1px solid #000;
+}
+
+
+
+
+input {
+       xfont-family: Monospace;
+       font-size: 11px; 
+}
+
+
+
+
+
+
+
+
+fieldset {
+		font:1em/145% 'Trebuchet MS',helvetica,arial,verdana;  
+position: relative;
+  margin: 15px 0 15px 0;
+  padding: 25px 0;
+  top: 40px;
+  border: 1px solid #7F5417;
+  width: 545px;
+
+}
+legend {
+  position: absolute;
+  top: -31px;
+  left: 8px;
+background-color: #333399;
+font-size: 1.1em;
+padding: 5px;
+color: #fff;
+width: 537px;
+left: -1px; 
+text-align: center;
+}
+label {
+    display: block;
+    float: left;
+    margin-bottom: 7px;
+    padding-left: 20px;
+    text-align: left;
+    width: 183px;
+}
+br {
+  clear: both;
+}
+.text {
+  border: 1px solid #177F75;
+  font:0.8em/145% 'Trebuchet MS',helvetica,arial,verdana;
+
+}
+
+.cancel {
+       width: 70px;
+       height: 25px;
+}
+
+.submit {
+  margin-top: 10px;
+  margin-left: 201px;
+  width: 70px;
+  height: 25px;
+
+}
+
+.labeltop {
+padding-top: 50px;
+}
+
+.textlabel {
+  xheight: 16px;
+}
+.texttop {
+  padding-top: 0px; 
+  margin-top: 50px;
+  height: 14px;
+}
+.text, select {
+  display: block;
+  float: left;
+  margin-bottom: 7px;
+}
+
+.tabtitle {
+  padding-bottom: 0px;
+  margin: 75px -660px -50px 280px;
+  color: rgb(221, 221, 221);
+  font-style: italic;
+  height: 0;
+  font-size: 5em;
+  float: left;
+}
+
+</style>
+</head><body><h1>Netman 204 - 
+ups.examle.com
+</h1>
+
+<div style="position: relative;z-index: 2">
+<ul id="nav">
+    <li><a href="#">Status</a>
+      <ul style="display: none;">
+            <li><a href="https://ups.examle.com/cgi-bin/view.cgi">General</a></li>
+            <li><a href="https://ups.examle.com/cgi-bin/view_s.cgi">Sensors</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Log</a>
+      <ul style="display: none;">
+            <li><a href="https://ups.examle.com/cgi-bin/logevent.cgi">Event log</a></li>
+<!--            <li><a href="logdata.cgi">Data log</a></li>-->
+            <li><a href="https://ups.examle.com/cgi-bin/db_datalogg.cgi">Data log</a></li>
+            <li><a href="https://ups.examle.com/cgi-bin/log.cgi">History log</a></li>
+      </ul>
+    </li>                                                
+    <li><a href="#">Config </a>
+      <ul style="display: none;">
+            <li><a href="https://ups.examle.com/cgi-bin/ups_config.cgi">Device</a>
+            </li><li><a href="https://ups.examle.com/cgi-bin/ip_config.cgi">Network</a>
+            </li><li><a href="#">Time</a>
+              <ul style="display: none;">
+                    <li><a href="https://ups.examle.com/cgi-bin/clock_config.cgi">Date &amp; Time</a></li>
+                    <li><a href="https://ups.examle.com/cgi-bin/tz_config.cgi">Timezone</a></li>
+                    <li><a href="https://ups.examle.com/cgi-bin/ntp_config.cgi">Scheduled NTP</a></li>
+              </ul>
+            </li><li><a href="#">Services</a>
+              <ul style="display: none;">
+                    <li><a href="https://ups.examle.com/cgi-bin/ssh_config.cgi">SSH</a></li>
+                    <li><a href="https://ups.examle.com/cgi-bin/ftp_config.cgi">FTP</a></li>
+                    <li><a href="https://ups.examle.com/cgi-bin/http_config.cgi">HTTP</a></li>
+                    <li><a href="https://ups.examle.com/cgi-bin/snmp_config.cgi">SNMPV1</a></li>
+                    <li><a href="https://ups.examle.com/cgi-bin/email_config.cgi">Email</a></li>
+                    <li><a href="https://ups.examle.com/cgi-bin/udp_config.cgi">UDP</a></li>
+		    <li><a href="https://ups.examle.com/cgi-bin/wol_config.cgi">Wake-on-lan</a></li>
+		    <li><a href="https://ups.examle.com/cgi-bin/datalog_config.cgi">Data log</a></li>
+		    <li><a href="https://ups.examle.com/cgi-bin/serialn_config.cgi">Serial Network</a></li>
+		    <li><a href="https://ups.examle.com/cgi-bin/modem_config.cgi">Modem</a></li>
+		    <li><a href="https://ups.examle.com/cgi-bin/sensor_config.cgi">Sensor</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li><a href="#">Service</a>
+      <ul style="display: none;">
+        <li><a href="https://ups.examle.com/cgi-bin/command.cgi">Command</a>
+        </li><li><a href="#">Change password</a>
+          <ul style="display: none;">
+           <li><a href="https://ups.examle.com/cgi-bin/changepwd.cgi">admin</a></li>
+           <li><a href="https://ups.examle.com/cgi-bin/changepwdfw.cgi">fwupgrade</a></li>
+           <li><a href="https://ups.examle.com/cgi-bin/changepwdus.cgi">user</a></li>
+          </ul>
+        </li><li><a href="https://ups.examle.com/cgi-bin/upgradesnmpconf.cgi">SNMPv3 upload</a></li>
+        <li><a href="https://ups.examle.com/cgi-bin/upgrade.cgi">Firmware upgrade</a></li>
+        <li><a href="https://ups.examle.com/cgi-bin/resetdefault.cgi">Reset default</a></li>
+        <li><a href="https://ups.examle.com/cgi-bin/reboot.cgi">Reboot</a></li>
+      </ul> 
+    </li>
+    <li><a href="https://ups.examle.com/cgi-bin/logout.cgi">Logout</a></li>
+    <li><a href="https://ups.examle.com/cgi-bin/view_about.cgi">System</a></li> 
+</ul></div>
+<h3>.</h3>
+<h2>System information</h2>
+<div align="center">
+<div align="center"></div><table class="devicedata" summary="data"><tbody>
+</tbody><thead><tr><th scope="col">Device</th></tr></thead>
+</table><table class="devicedata" summary="nominal data"><tbody><tr><td><b>Model</b></td><td>UMO3            </td></tr><tr><td><b>Serial number</b></td><td>                </td></tr><tr><td><b>Power [kVA]</b></td><td>  2.2</td></tr><tr><td><b>Power [kW]</b></td><td>  1.9</td></tr><tr><td><b>Battery capacity [Ah]</b></td><td>    7</td></tr><tr><td><b>Battery voltage [Vdc]</b></td><td>   72</td></tr><tr><td><b>Firmware version</b></td><td>SWM035-01-09</td></tr></tbody></table><br><table class="devicedata"><thead><tr><th scope="col">Device configuration</th></tr></thead></table><table class="devicedata"><tbody><tr><td><b>PRTK code</b></td><td>GPSER11201RU</td></tr><tr><td><b>Address</b></td><td>1</td></tr><tr><td><b>Name</b></td><td>ups.examle.com</td></tr><tr><td><b>Identification number</b></td><td>MH33VM030001111</td></tr></tbody></table>                                                                                       <br><table class="devicedata" summary="data"><tbody>
+</tbody><thead><tr><th scope="col">Network card</th></tr></thead></table><table class="devicedata"><tbody>
+<tr><td><b>Card version</b></td><td>
+e3300003
+</td></tr><tr><td><b>Serial Number</b></td><td>
+1507xxxx
+</td></tr><tr><td><b>MAC Address</b></td><td>
+00:02:63:ff:ff:ff
+</td></tr><tr><td><b>Application version</b></td><td>
+01.04&nbsp;<img src="view_about_files/official.png" height="14" width="14">
+</td></tr><tr><td><b>System version</b></td><td>
+S15-2</td></tr><tr><td><b>Kernel</b></td><td>
+3.12.1-EK20150514
+</td></tr><tr><td><b>Current date</b></td><td>
+Tue Jan 10 15:19:47 CET 2017
+</td></tr></tbody></table><br><table class="devicedata"><thead><tr><th scope="col">Network configuration</th></tr></thead></table>
+<table class="devicedata"><tbody><tr><td><b>Hostname</b></td><td>
+ups.examle.com
+</td></tr><tr><td><b>DHCP enabled</b></td><td>
+no
+</td></tr><tr><td><b>IP Address</b></td><td>
+192.168.88.242
+</td></tr><tr><td><b>Netmask</b></td><td>
+255.255.255.240
+</td></tr></tbody></table>
+
+</div></body></html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>NetMan 204</title>
+<script type='text/javascript' src='../jquery-1.6.4.min.js'></script>
+<script type='text/javascript' src='../menu.js'></script>
+<script type="text/javascript" src="../fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript" src="../jquery.form.js"></script>
+<link rel="stylesheet" href="../style.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+
+<script type="text/javascript">
+   var timeout = 180*1000;
+   setTimeout("timeoutConfirm();",timeout);
+   function timeoutConfirm(){
+    alert('Session expired!');
+    window.location.replace("/");
+    window.opener='x'; 
+    window.open('','_parent',''); 
+    window.close();
+    history.replaceState({}, document.title, "/");
+   }
+
+//var numberOfEntries = window.history.length;
+//for (i=0;i<=numberOfEntries;i=i+1)
+//{
+//history.replaceState(i,"login","/");
+//}
+
+//window.onpopstate = function(event) { 
+//   alert("Don't use back or forward on your browser!"); 
+//  alert("location: " + document.location + ", state: " + JSON.stringify(event.state));  
+//  };  
+//  history.pushState({page: 1}, "title 1", "?page=1");  
+//  history.pushState({page: 2}, "title 2", "?page=2");  
+//  history.replaceState({page: 3}, "title 3", "?page=3"); 
+   // wait for the DOM to be loaded
+   $(document).ready(function() {
+     // bind 'myForm' and provide a simple callback function
+     //setTimeout($.blockUI({ message: null} ), 14000); 
+     $("#myForm").ajaxForm({
+     beforeSubmit : function(arr, $form, options){
+        $.fancybox.showActivity();
+        return true;
+     },
+     success: function(responseText) {
+        if (responseText.length==3){
+        window.location.reload();
+        } 
+        else 
+        $.fancybox({
+        'content' : responseText,
+        'title' : "Netman 204"
+        });
+     }
+     });
+   });
+</script>
+</head>
+
+<body>
+<h1>NetMan 204 
+
+
+ - 
+ups.examle.com
+</h1>
+
+<div style="position: relative;z-index: 2">
+<ul id="nav">
+    <li><a href="#">Status</a>
+      <ul>
+            <li><a href="view.cgi">General</a></li>
+            <li><a href="view_s.cgi">Sensors</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Log</a>
+      <ul>
+            <li><a href="logevent.cgi">Event log</a></li>
+<!--            <li><a href="logdata.cgi">Data log</a></li>-->
+            <li><a href="db_datalogg.cgi">Data log</a></li>
+            <li><a href="log.cgi">History log</a></li>
+      </ul>
+    </li>                                                
+    <li><a href="#">Config </a>
+      <ul>
+            <li><a href="ups_config.cgi">Device</a>
+            <li><a href="ip_config.cgi">Network</a>
+            <li><a href="#">Time</a>
+              <ul>
+                    <li><a href="clock_config.cgi">Date & Time</a></li>
+                    <li><a href="tz_config.cgi">Timezone</a></li>
+                    <li><a href="ntp_config.cgi">Scheduled NTP</a></li>
+              </ul>
+            <li><a href="#">Services</a>
+              <ul>
+                    <li><a href="ssh_config.cgi">SSH</a></li>
+                    <li><a href="ftp_config.cgi">FTP</a></li>
+                    <li><a href="http_config.cgi">HTTP</a></li>
+                    <li><a href="snmp_config.cgi">SNMPV1</a></li>
+                    <li><a href="email_config.cgi">Email</a></li>
+                    <li><a href="udp_config.cgi">UDP</a></li>
+		    <li><a href="wol_config.cgi">Wake-on-lan</a></li>
+		    <li><a href="datalog_config.cgi">Data log</a></li>
+		    <li><a href="serialn_config.cgi">Serial Network</a></li>
+		    <li><a href="modem_config.cgi">Modem</a></li>
+		    <li><a href="sensor_config.cgi">Sensor</a></li>
+              </ul>
+            </li>
+      </ul>
+    </li>
+    <li><a href="#">Service</a>
+      <ul>
+        <li><a href="command.cgi">Command</a>
+        <li><a href="#">Change password</a>
+          <ul>
+           <li><a href="changepwd.cgi">admin</a></li>
+           <li><a href="changepwdfw.cgi">fwupgrade</a></li>
+           <li><a href="changepwdus.cgi">user</a></li>
+          </ul>
+        <li><a href="upgradesnmpconf.cgi">SNMPv3 upload</a></li>
+        <li><a href="upgrade.cgi">Firmware upgrade</a></li>
+        <li><a href="resetdefault.cgi">Reset default</a></li>
+        <li><a href="reboot.cgi">Reboot</a></li>
+      </ul> 
+    </li>
+    <li><a href="logout.cgi">Logout</a></li>
+    <li><a href="view_about.cgi">System</a></li> 
+</ul></div>
+<h3>.</h3>
+<h2>SNMPV1 configuration</h2>
+<form id="myForm" action="snmp_config_w.cgi" method="post">
+<fieldset><legend><b>SNMPV1 configuration</b></legend>
+<input type="checkbox" 
+CHECKED
+ id="enable_snmp" name="enable_snmp" class="texttop" style="margin-bottom: 16px; margin-left: 20px; margin-top: 20px;">Enable SNMP<br>
+<label for="address" class=address>Get community</label>
+<input type=text class=textlabel name="snmp_cconfig0" id="snmp_cconfig0" value="
+public" placeholder="Community string"
+maxlength="" min="" max=""/><br>
+<label for="address" class=address>Set community</label>
+<input type=text class=textlabel name="snmp_cconfig1" id="snmp_cconfig1" value="
+private" placeholder="Community string"
+maxlength="" min="" max=""/><br>
+<label for="address" class=address>Trap community</label>
+<input type=text class=textlabel name="snmp_cconfig2" id="snmp_cconfig2" value="
+public" placeholder="Community string"
+maxlength="" min="" max=""/><br>
+<label for="address" class=address>Trap receiver 1</label>
+<input type=text class=textlabel name="snmp_config0" id="snmp_config0" value="
+192.168.18.170" placeholder="IP address"
+maxlength="" min="" max=""/><br>
+<label for="address" class=address>Trap receiver 2</label>
+<input type=text class=textlabel name="snmp_config1" id="snmp_config1" value="
+" placeholder="IP address" 
+maxlength="" min="" max=""/><br>
+<label for="address" class=address>Trap receiver 3</label>
+<input type=text class=textlabel name="snmp_config2" id="snmp_config2" value="
+" placeholder="IP address" 
+maxlength="" min="" max=""/><br>
+<label for="address" class=address>Trap receiver 4</label>
+<input type=text class=textlabel name="snmp_config3" id="snmp_config3" value="
+" placeholder="IP address" 
+maxlength="" min="" max=""/><br>
+<label for="address" class=address>Trap receiver 5</label>
+<input type=text class=textlabel name="snmp_config4" id="snmp_config4" value="
+" placeholder="IP address" 
+maxlength="" min="" max=""/><br>
+<label for="address" class=address>Trap receiver 6</label>
+<input type=text class=textlabel name="snmp_config5" id="snmp_config5" value="
+" placeholder="IP address" 
+maxlength="" min="" max=""/><br>
+<label for="address" class=address>Trap receiver 7</label>
+<input type=text class=textlabel name="snmp_config6" id="snmp_config6" value="
+" placeholder="IP address" 
+maxlength="" min="" max=""/><br>
+<label for="address" class=address>sysContact</label>
+<input type=text class=textlabel name="snmp_sysC" id="snmp_sysC" value="
+" placeholder="sysContact" 
+maxlength="30" min="" max=""/><br>
+<label for="address" class=address>sysName</label>
+<input type=text class=textlabel name="snmp_sysN" id="snmp_sysN" value="
+ups.examle.com" placeholder="sysName"
+maxlength="30" min="" max=""/><br>
+<label for="address" class=address>sysLocation</label>
+<input type=text class=textlabel name="snmp_sysL" id="snmp_sysL" value="
+" placeholder="sysLocation" 
+maxlength="30" min="" max=""/><br>
+<input type="hidden" name="session" value="
+session: 72bececc28275a7228f4d65c019dde7229de5842a5e9a8baf22b300e0b565617">
+<hr>
+<input type="submit" class="submit" value="OK"> <input type="reset" class="cancel" value="Cancel">
+</fieldset>
+</form>
+</body>
+</html>
