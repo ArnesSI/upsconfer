@@ -71,6 +71,13 @@ class UpsSocomecNetys(UpsGeneric):
         self.cookies = response.cookies
         return True
 
+    def logout(self):
+        """
+        Does not support logout. Just clear any existing cookies.
+        """
+        self.cookies = None
+        return True
+
     def get_snmp_config(self):
         """
         forms/socomec/netys/net_snmpaccess1.htm
@@ -187,6 +194,12 @@ class UpsSocomecNetys(UpsGeneric):
         info['rating_va'] = info['rating_va'].split(' ')[0]
         return info
 
+    def reboot(self):
+        """
+        No reboot option in the web interface. Just logout.
+        """
+        return self.logout()
+
     def _get_info_html(self):
         response = requests.get('http://%s/info_ident.htm' % self.host, cookies=self.cookies)
         response.raise_for_status()
@@ -211,6 +224,13 @@ class UpsSocomecMasterys(UpsGeneric):
         response = requests.get('http://%s/PageMonComprehensive.html' % self.host, auth=self.auth)
         if not response.ok:
             raise LoginFailure()
+        return True
+
+    def logout(self):
+        """
+        Basic http auth, nothing to logout from.
+        """
+        self.auth = None
         return True
 
     def get_snmp_config(self):
@@ -364,3 +384,11 @@ class UpsSocomecMasterys(UpsGeneric):
                 if m.group(2):
                     info['agent_serial'] = m.group(2)
         return info
+
+    def reboot(self):
+        data = {'XAAAAAAABAAAO': '1'}
+        requests.post('http://%s/PageAdmAgentControl.html' % self.host,
+                      auth=self.auth,
+                      data=data)
+        self.auth = None
+        return True

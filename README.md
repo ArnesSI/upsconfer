@@ -31,6 +31,15 @@ Log into device's management interface.
 
 On most supported devices you need to call this method before doing any other operations. 
 
+### ups.logout()
+
+Log out of device's management interface.
+
+Some devices support only one concurrent management session. So it is advisable to call
+this method when you're done with a device to allow other users to login immediately. 
+Otherwise they would have to wait for the current management session to timeout due to
+inactivity.
+
 ### ups.get_serial()
 
 Returns a serial number of the device as a string.
@@ -114,3 +123,8 @@ Returns SNMP Trap configuration.
 Sets SNMP trap configuration from new_config dict.
 
 Optional keys that are not supported by this device type are silently ignored.
+
+### ups.reboot()
+
+Reboot the management interface. On some devices some configuration changes can
+only be applied after a reboot.

@@ -141,12 +141,12 @@ class UpsRielloSentinel(UpsGeneric):
             data['snmp_config%d' % i] = get_list_item(html.xpath('//input[@name="snmp_config%d"]/@value' % i), 0, '').strip()
         return data
 
-    def _logout(self):
+    def logout(self):
         requests.get('https://%s/cgi-bin/logout.cgi' % self.host, cookies=self.cookies, verify=False)
         self.cookies = None
         return True
 
-    def _reboot(self):
+    def reboot(self):
         requests.get('https://%s/cgi-bin/reboot_2.cgi' % self.host, cookies=self.cookies, verify=False)
         self.cookies = None
         return True

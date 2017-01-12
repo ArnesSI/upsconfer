@@ -37,6 +37,9 @@ class UpsGeneric(object):
     def login(self):
         raise NotImplementedError()
 
+    def logout(self):
+        raise NotImplementedError()
+
     def get_snmp_config(self):
         """
         Returns the current SNMP client configuration:
@@ -147,4 +150,7 @@ class UpsGeneric(object):
         ```
         :return: dict
         """
+        raise NotImplementedError()
+
+    def reboot(self):
         raise NotImplementedError()
