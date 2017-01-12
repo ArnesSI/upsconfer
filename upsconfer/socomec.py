@@ -196,9 +196,9 @@ class UpsSocomecNetys(UpsGeneric):
 
 class UpsSocomecMasterys(UpsGeneric):
     MAP_ACCESS = {
-        '1': 'ro',
-        '2': 'rw',
-        '3': 'none'
+        'ro': '1',
+        'rw': '2',
+        'none': '3'
     }
 
     def __init__(self, *args, **kwargs):
@@ -228,7 +228,7 @@ class UpsSocomecMasterys(UpsGeneric):
         for i in char_range('B', 'I'):
             config[str(idx)] = {'ip': get_list_item(html.xpath(xp_ip.format(nr=i)), 0, '')}
             config[str(idx)]['community'] = html.xpath(xp_community.format(nr=i))[0]
-            config[str(idx)]['access'] = self.MAP_ACCESS.get(html.xpath(xp_access.format(nr=i))[0], 'none')
+            config[str(idx)]['access'] = get_dict_key(self.MAP_ACCESS, str(html.xpath(xp_access.format(nr=i))[0]), 'none')
             idx += 1
         # change the last entry into a default
         last_idx = str(idx-1)
@@ -237,6 +237,39 @@ class UpsSocomecMasterys(UpsGeneric):
         config['default'] = last_entry
         del(config[last_idx])
         return config
+
+    def set_snmp_config(self, new_config):
+        """
+        Form structure:
+        XAAAAAAABAADE: <1->ip>
+        XAAAAAAABAADF: <1->community>
+        XAAAAAAABAADG: <1->access>[valid values: 1|2|3 (ro|rw|none)]
+        XAAAAAAACAADE: <2->ip>
+        XAAAAAAACAADF: <2->community>
+        XAAAAAAACAADG: <2->access>[valid values: 1|2|3 (ro|rw|none)]
+        ...
+        XAAAAAAAIAADE: ''
+        XAAAAAAAIAADF: <default->community>
+        XAAAAAAAIAADG: <default->access>[valid values: 1|2|3 (ro|rw|none)]
+        """
+        config = self.get_snmp_config()
+        config.update(new_config)
+        data = {}
+        idx = 1
+        for i in char_range('B', 'H'):
+            entry = config[str(idx)]
+            data['XAAAAAAA%sAADE' % i] = entry['ip']
+            data['XAAAAAAA%sAADF' % i] = entry['community']
+            data['XAAAAAAA%sAADG' % i] = self.MAP_ACCESS.get(entry['access'], 'none')
+            idx += 1
+        data['XAAAAAAAIAADE'] = ''
+        data['XAAAAAAAIAADF'] = config['default']['community']
+        data['XAAAAAAAIAADG'] = self.MAP_ACCESS.get(config['default']['access'], 'none')
+        response = requests.post('http://%s/PageAdmAgentAccess.html' % self.host,
+                                 auth=self.auth,
+                                 data=data)
+        response.raise_for_status()
+        return True
 
     def get_trap_config(self):
         """
@@ -268,6 +301,43 @@ class UpsSocomecMasterys(UpsGeneric):
             config[str(idx)] = entry
             idx += 1
         return config
+
+    def set_trap_config(self, new_config):
+        """
+        Form structure:
+        XAAAAAAABAAFE: <1->ip>
+        XAAAAAAABAAFF: <1->community>
+        XAAAAAAABAAFJ: <1->type|severity>[valid values: 1|2|3 (severity.none|type.proprietary|type.rfc)
+        XAAAAAAABAAFG: <1->alias>
+        XAAAAAAACAAFE: <2->ip>
+        XAAAAAAACAAFF: <2->community>
+        XAAAAAAACAAFJ: <2->type|severity>[valid values: 1|2|3 (severity.none|type.proprietary|type.rfc)
+        XAAAAAAACAAFG: <2->alias>
+        ...
+        XAAAAAAAIAAFG: <8->alias>
+        """
+        config = self.get_trap_config()
+        config.update(new_config)
+        data = {}
+        idx = 1
+        for i in char_range('B', 'I'):
+            entry = config[str(idx)]
+            data['XAAAAAAA%sAAFE' % i] = entry['ip']
+            data['XAAAAAAA%sAAFF' % i] = entry['community']
+            if entry.get('severity', '') == 'none':
+                typ = '1'
+            elif entry.get('type', 'rfc') == 'proprietary':
+                typ = '2'
+            else:
+                typ = '3'
+            data['XAAAAAAA%sAAFJ' % i] = typ
+            data['XAAAAAAA%sAAFG' % i] = entry.get('alias', '')
+            idx += 1
+        response = requests.post('http://%s/PageAdmAgentTrap.html' % self.host,
+                                 auth=self.auth,
+                                 data=data)
+        response.raise_for_status()
+        return True
 
     def get_info(self):
         """
