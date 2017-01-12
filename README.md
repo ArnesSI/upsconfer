@@ -4,10 +4,10 @@ upsconfer is a python library to get info and configure UPS devices.
 
 ## Supported devices
 
-* Socomec Netys with NetVision management cards
-* Socomec Masterys with NetVision management cards
-* Socomec Digys with NetVision management cards
-* Riello UPS with Netman 204 management cards
+* Socomec Netys with NetVision management cards (`UpsSocomecNetys`)
+* Socomec Masterys with NetVision management cards (`UpsSocomecMasterys`)
+* Socomec Digys with NetVision management cards (`UpsSocomecMasterys`)
+* Riello UPS with Netman 204 management cards (`UpsRielloSentinel`)
 
 ## Tested on
 
@@ -18,6 +18,18 @@ upsconfer is a python library to get info and configure UPS devices.
 
 
 ## API
+
+### Creating an ups object
+
+```
+ups = upsconfer.UpsSocomecNetys(host='myups.example.com', 'user='admin', password='mypass')
+```
+
+### ups.login()
+
+Log into device's management interface.
+
+On most supported devices you need to call this method before doing any other operations. 
 
 ### ups.get_serial()
 
