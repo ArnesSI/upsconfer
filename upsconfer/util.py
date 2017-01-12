@@ -38,4 +38,4 @@ def get_list_item(l, idx=0, default=None):
 def get_dict_key(d, value, default=None):
     if value not in d.values():
         return default
-    return d.keys[d.values().index(value)]
+    return d.keys()[d.values().index(value)]
